@@ -1,10 +1,26 @@
-# nyc-civic-engagement
-Leveraging data to drive civic engagement and allocation of resources
+# NYC Civic Engagement
+Driving hyper local civic engagement and allocation of resources through data.
 
 ## Goal:
-Combine multiple publically available datasets and display them on google maps to allow people to figure out what issues they'd like to address or where agencies should focus their efforts.
+Leverage publicly available data-sets and mapping technology to allow people to see problems in their communities, and where they can volunteer to help address them.  Additionally, we'd like to provide resources for agencies and non profits to make informed efforts about where to allocate their resources, and where they can get people assist with their efforts.
 
-## Potential Datasets
+
+## Selected Data-sets
+
+### Volunteer
+	https://www.volunteermatch.org/legal/publicuseapi
+
+### Poverty
+	http://www.census.gov/data/developers/data-sets/Poverty-Statistics.html
+	http://www.nyc.gov/html/ceo/html/poverty/files.shtml
+
+
+## Other potential Data-sets
+
+### Volunteer
+	https://data.cityofnewyork.us/Social-Services/NYC-Service-Volunteer-Opportunities/bquu-z2ht
+	https://www.volunteermatch.org/legal/publicuseapi
+
 
 ### Poverty
 	http://www.nyc.gov/html/ceo/html/poverty/lookup.shtml
@@ -16,7 +32,11 @@ Combine multiple publically available datasets and display them on google maps t
 	https://data.cityofnewyork.us/Social-Services/Cash-Assistance-Engagement-Report/hb7y-b986
 	https://data.cityofnewyork.us/Social-Services/60-Month-Converted-to-Safety-Net-SN-recipients/nstm-kb7u
 	https://data.cityofnewyork.us/Social-Services/Citywide-Cash-Assistance-Cases/9jbx-hna8
-  
+	https://data.cityofnewyork.us/Health/NYC-School-meals-income-levels/h7mf-hrsw
+	https://data.cityofnewyork.us/Health/WIC-Income-eligibility/366m-74zg
+	http://nyscommunityaction.org/wp-content/uploads/2016/02/FINAL-March-15-County-Comparisons.pdf
+	http://www.nyc.gov/html/onenyc/downloads/pdf/publications/OneNYC.pdf
+
 ### Homelessness
 	https://data.cityofnewyork.us/Social-Services/Directory-Of-Homeless-Drop-In-Centers/bmxf-3rd4
 	https://data.cityofnewyork.us/Social-Services/Directory-Of-Homeless-Population-By-Year/5t4n-d72c
@@ -30,9 +50,6 @@ Combine multiple publically available datasets and display them on google maps t
 
 ### GED / Education
 	https://data.cityofnewyork.us/Social-Services/GED-Plus-Locations/pd5h-92mc
-
-### Volunteer
-	https://data.cityofnewyork.us/Social-Services/NYC-Service-Volunteer-Opportunities/bquu-z2ht
 
 ### Children
 	https://data.cityofnewyork.us/Social-Services/Child-Welfare-Indicators-Annual-and-quarterly-repo/3m2q-9maw
@@ -48,5 +65,39 @@ Combine multiple publically available datasets and display them on google maps t
 ### Social indicators
 	https://data.cityofnewyork.us/Social-Services/Social-Indicators-Report-Data-By-Neighborhood-Tabu/ic2k-etms
 
+### Health
+	https://data.cityofnewyork.us/Health/New-York-City-Leading-Causes-of-Death/jb7j-dtam
+	https://data.cityofnewyork.us/Health/Health-and-Nutrition-Examination-Survey-Results-Hi/ghse-r5nk
+	https://data.cityofnewyork.us/Health/Community-Health-Survey-SAS-data-Historical-Data-/hh8v-7m7u
+	https://data.cityofnewyork.us/Health/Mental-Health-Service-Finder-Data/8nqg-ia7v
+	https://data.cityofnewyork.us/Health/Family-planning-benefit-program-income-levels/a9es-3fcm
+	https://data.cityofnewyork.us/Health/Medicaid-buy-in-program-income-levels/qt67-786k
+	https://data.cityofnewyork.us/Health/HIV-Condom-Distribution-Sites/f7ta-5e24
+	https://data.cityofnewyork.us/Health/Health-Center-Districts/b55q-34ps
+	https://data.cityofnewyork.us/Health/HIV-Testing-Locations/72ss-25qh
+
 ### Shape File
 	https://data.cityofnewyork.us/Social-Services/LinkNYC-Locations-Shapefile/7b32-6xny
+	http://www1.nyc.gov/site/planning/data-maps/open-data/districts-download-metadata.page
+
+### Uncatagorized
+	http://library.columbia.edu/locations/dssc/data/nyc.html
+	https://www.huduser.gov/portal/datasets/fmr.html
+	http://www.nyc.gov/html/dot/html/about/datafeeds.shtml
+	http://factfinder.census.gov/faces/nav/jsf/pages/download_center.xhtml
+	https://www.data.gov/
+	http://www.nyc.gov/html/onenyc/downloads/pdf/publications/OneNYC.pdf
+
+### Places that might be worth reaching out to
+	https://www.volunteermatch.org/legal/publicuseapi
+
+## Technical resources
+	https://carto.com/
+
+## Roadmap
+	1. Identify what datasets we wish to target
+	1. Identify sources of that data
+	1. Pick first source
+	1. Tech choice
+	1. Plot on map
+	1. Integrate volunteer
