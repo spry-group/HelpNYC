@@ -14,6 +14,8 @@ Leverage publicly available data-sets and mapping technology to allow people to 
 	http://www.census.gov/data/developers/data-sets/Poverty-Statistics.html
 	http://www.nyc.gov/html/ceo/html/poverty/files.shtml
 
+### Housing, Education
+	https://data.cityofnewyork.us/City-Government/Demographics-and-profiles-at-the-Public-Use-Microd/7q5y-m6mr
 
 ## Other potential Data-sets
 
