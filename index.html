@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <style>
+        body {
+            background: #333;
+            color: #FFF;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .header {
+            height: 5em;
+            font-family: "Arial Black", "Gadget", sans-serif;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+        }
+        .footer {
+            height:20vh;
+        }
+        .modal {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .modal-call-to-action {
+            background-color:rgba(0, 0, 0, 0.65);
+            font-size: 2em;
+        }
+
+        .call-to-action-text {
+            text-align: center;
+            width: 95%;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            top: 50%;
+            transform: translateY(-75%);
+        }
+        .call-to-action-text h1 {
+            font-size: 2.25em;
+            /*2em for mobile*/
+        }
+        .call-to-action-text h3 {
+            font-size: 0.95em;
+        }
+        .invisible {
+            opacity: 0;
+        }
+        .modal-info {
+            display: none;
+            text-align: center;
+            color: #222;
+            background-color:rgba(0, 0, 0, 0.40);
+        }
+        .modal-info-content {
+            width: 33%;
+            margin-left: auto;
+            margin-right: auto;
+            min-height: 5em;
+            -webkit-box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
+        }
+        .modal-info-content .modal-text {
+            text-align: left;
+        }
+        .modal-info-content .sources {
+            font-size: 0.75em;
+        }
+        .modal-info-top, .modal-info-bottom {
+            display: inline-block;
+            width: 100%;
+            min-height: 5em;
+            padding: 0 2em;
+        }
+        .modal-info-top {
+            background: rgba(252,253,253,1);
+            background: -moz-linear-gradient(top, rgba(252,253,253,1) 0%, rgba(216,225,231,1) 100%);
+            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(252,253,253,1)), color-stop(100%, rgba(216,225,231,1)));
+            background: -webkit-linear-gradient(top, rgba(252,253,253,1) 0%, rgba(216,225,231,1) 100%);
+            background: -o-linear-gradient(top, rgba(252,253,253,1) 0%, rgba(216,225,231,1) 100%);
+            background: -ms-linear-gradient(top, rgba(252,253,253,1) 0%, rgba(216,225,231,1) 100%);
+            background: linear-gradient(to bottom, rgba(252,253,253,1) 0%, rgba(216,225,231,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfdfd', endColorstr='#d8e1e7', GradientType=0 );
+        }
+        .modal-info-bottom {
+            background: rgba(181,198,208,1);
+            background: -moz-linear-gradient(top, rgba(181,198,208,1) 0%, rgba(224,239,249,1) 100%);
+            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(181,198,208,1)), color-stop(100%, rgba(224,239,249,1)));
+            background: -webkit-linear-gradient(top, rgba(181,198,208,1) 0%, rgba(224,239,249,1) 100%);
+            background: -o-linear-gradient(top, rgba(181,198,208,1) 0%, rgba(224,239,249,1) 100%);
+            background: -ms-linear-gradient(top, rgba(181,198,208,1) 0%, rgba(224,239,249,1) 100%);
+            background: linear-gradient(to bottom, rgba(181,198,208,1) 0%, rgba(224,239,249,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#d8e1e7', GradientType=0 );
+        }
+
+        .prompt {
+        }
+
+        .center-v {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Mobile view */
+        @media screen and (max-width: 750px) {
+            .modal-call-to-action {
+                font-size: 1em;
+            }
+            .call-to-action-text h3 {
+                font-size: 1.05em;
+            }
+            .hidden-on-mobile {
+                display: none;
+            }
+            .header .prompt h1 {
+                font-size: 1.5em;
+            }
+            .modal-info-content {
+                width: 90%
+            }
+        }
+
+        /* Cartodb overrides */
+        #map {
+            height: 84vh;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            color: #fff;
+            position: relative;
+        }
+        #map .cartodb-map-wrapper .cartodb-tooltip {
+            min-width: 15em;
+            max-width: 25em;
+        }
+        .tooltip-title, .modal-title {
+            font-size: 1.5em;
+            margin-bottom: 0.5em;
+            text-align: center;
+        }
+        .tooltip-label, .tooltip-value {
+            display: inline-block;
+            margin-bottom: 0.25rem;
+        }
+        .tooltip-label {
+            width: 60%;
+            margin: 0 0 0.5em 2rem;
+        }
+        .tooltip-value {
+            display: inline-block;
+        }
+        .tooltip-more {
+            width: 100%;
+            text-align:center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal modal-call-to-action">
+        <div class="call-to-action-text">
+            <h2>
+                <span class="intro-1">Millions of New Yorkers live below the poverty line.
+                <span class="intro-2 invisible">  Not everyone graduates from high school.</span>
+                <span class="intro-3 invisible">  They are your neighbors.</span>
+            </h2>
+            <h1 class="intro-4 invisible">You can help.</h1>
+            <h3 class="intro-5 invisible">Click on your neighborhood to learn more.</h2>
+        </div>
+    </div>
+    <div class="header">
+        <!-- <h1 class="prompt">How many people in your neighborhood Live in Poverty?</h1> -->
+        <div class="prompt center-v invisible">
+            <h1>Help NYC fight poverty<span class="hidden-on-mobile"> in your neighborhood</span>.</h1>
+            <!-- <h1>How many people in your neighborhood <span>Don't Graduate High School?</span></h1> -->
+        </div>
+    </div>
+    <div id="map" class="invisible">
+        <div class="modal modal-info">
+            <div class="modal-info-content center-v">
+                <div class="modal-info-top">
+                    <h1 class="modal-title"></h1>
+                    <h3 class="modal-text">320,000 people within your community live below the poverty level. 603,000 adults never completed High School, or got their GED.</h3>
+                    <div class="modal-text sources">
+                        <p>1 http://www.nyc.gov/html/ceo/html/poverty/files.shtml
+                        <br />2 https://data.cityofnewyork.us/City-Government/Demographics-and-profiles-at-the-Public-Use-Microd/7q5y-m6mr</p>
+                    </div>
+                </div>
+                <div class="modal-info-bottom">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            var vis;
+            var layers;
+
+            cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', {
+                zoom: 11,
+                center: [40.705, -73.86]
+            }).done(function(visualization, maplayers) {
+                vis = visualization;
+                layers = maplayers;
+                console.log(vis, layers);
+
+                layers[1].on('featureClick', function(e, latlng, pos, data, layer) {
+                  showInfoModal(data);
+                });
+            });
+
+            $('.modal-info').on('click', function(e) {
+                if (e.target === this) {
+                    hideInfoModal();
+                }
+            });
+
+            function showInfoModal(data) {
+                $('.cartodb-tooltip').fadeOut(100);
+                console.log(vis.map);
+                console.log(vis.map.get('zoom'));
+                // debugger;
+                vis.map.set({zoom: 13});
+                var container = $('.modal-info');
+                console.log(data);
+                container.find('.modal-title').text(data.name);
+                container.fadeIn(1000);
+
+            }
+
+            function hideInfoModal() {
+                $('.modal-info').fadeOut(1000);
+                $('.cartodb-tooltip').delay(1001).fadeIn(1000);
+            }
+
+            $('.call-to-action-text .intro-2').delay(1000).fadeTo(2000, 1);
+            $('.call-to-action-text .intro-3').delay(4000).fadeTo(2000, 1);
+            $('.call-to-action-text .intro-4').delay(6500).fadeTo(2000, 1);
+            $('.call-to-action-text .intro-5').delay(8750).fadeTo(2250, 1);
+            $('.modal-call-to-action').on('click', function(e) {
+                $('#map, .header .prompt').stop().fadeTo(1250, 1)
+                $('.modal-call-to-action').stop().fadeOut(1);
+            });
+            $('#map, .header .prompt').delay(11750).fadeTo(1250, 1)
+            $('.modal-call-to-action').delay(11750).fadeOut(1250);
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+</body>
+</html>
