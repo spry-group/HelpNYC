@@ -4,7 +4,13 @@
 <head>
     <title></title>
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <meta name="viewport" content="width=device-width">
     <style>
+        @font-face {
+            font-family: KeepCalm;
+            src: url('fonts/KeepCalm-Medium.ttf') format('truetype'),
+                 url('fonts/KeepCalm-Medium.woff') format('woff');
+        }
         body {
             background: #333;
             color: #FFF;
@@ -15,8 +21,13 @@
             font-family: "Arial Black", "Gadget", sans-serif;
             text-align: center;
         }
-        .header h1 {
-            margin: 0;
+        .header .header-text {
+            position: relative;
+            top: -0.36em;
+            font-size: 1.5em;
+        }
+        .header .logo {
+            height: 2em;
         }
         .footer {
             height:20vh;
@@ -60,7 +71,9 @@
             background-color:rgba(0, 0, 0, 0.40);
         }
         .modal-info-content {
-            width: 33%;
+            height: 90%;
+            overflow-y: scroll;
+            width: 50%;
             margin-left: auto;
             margin-right: auto;
             min-height: 5em;
@@ -75,10 +88,11 @@
             font-size: 0.75em;
         }
         .modal-info-top, .modal-info-bottom {
-            display: inline-block;
-            width: 100%;
-            min-height: 5em;
             padding: 0 2em;
+            display: inline-block;
+            min-height: 5em;
+            text-align: left;
+            min-height: 50%;
         }
         .modal-info-top {
             background: rgba(252,253,253,1);
@@ -100,6 +114,14 @@
             background: linear-gradient(to bottom, rgba(181,198,208,1) 0%, rgba(224,239,249,1) 100%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f6f8', endColorstr='#d8e1e7', GradientType=0 );
         }
+        .modal-info-bottom h2, h3 {
+            margin: 0;
+        }
+        .margin-none {
+            margin: 0;
+        }
+
+        .modal-info-stats, .mobile-info-social,
 
         .prompt {
         }
@@ -111,7 +133,7 @@
         }
 
         /* Mobile view */
-        @media screen and (max-width: 750px) {
+        @media (max-width: 750px) {
             .modal-call-to-action {
                 font-size: 1em;
             }
@@ -127,6 +149,13 @@
             .modal-info-content {
                 width: 90%
             }
+           .header .logo {
+                height: 1.25em;
+            }
+            .header .header-text {
+                top: -0.355em;
+                font-size: 1em;
+            }
         }
 
         /* Cartodb overrides */
@@ -138,14 +167,20 @@
             color: #fff;
             position: relative;
         }
+        #map div.leaflet-tile-pane div.leaflet-tile-container. .leaflet-tile {
+            transition: opacity 500ms;
+            transition: all 5s ease-in ease-out;
+        }
         #map .cartodb-map-wrapper .cartodb-tooltip {
             min-width: 15em;
             max-width: 25em;
         }
-        .tooltip-title, .modal-title {
+        .tooltip-title, .modal-title, .modal-opportunities-title {
             font-size: 1.5em;
             margin-bottom: 0.5em;
             text-align: center;
+            width: 100%;
+            font-family: KeepCalm, Arial, Helvetica, sans-serif;
         }
         .tooltip-label, .tooltip-value {
             display: inline-block;
@@ -163,6 +198,9 @@
             text-align:center;
             font-style: italic;
         }
+        #map .cartodb-legend .legend-title {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -178,10 +216,8 @@
         </div>
     </div>
     <div class="header">
-        <!-- <h1 class="prompt">How many people in your neighborhood Live in Poverty?</h1> -->
         <div class="prompt center-v invisible">
-            <h1>Help NYC fight poverty<span class="hidden-on-mobile"> in your neighborhood</span>.</h1>
-            <!-- <h1>How many people in your neighborhood <span>Don't Graduate High School?</span></h1> -->
+            <h1><img src="./images/HelpNYCLogo.png" class="logo"> <span class="header-text">fight poverty.</span></h1>
         </div>
     </div>
     <div id="map" class="invisible">
@@ -189,22 +225,58 @@
             <div class="modal-info-content center-v">
                 <div class="modal-info-top">
                     <h1 class="modal-title"></h1>
-                    <h3 class="modal-text">320,000 people within your community live below the poverty level. 603,000 adults never completed High School, or got their GED.</h3>
+                    <p class="modal-info-stats"><span class="stat-poverty"></span> people within your community live below the poverty level.</p>
+                    <p class="modal-info-stats"><span class="stat-no-diploma"></span> adults never completed High School, and didn't get their GED.</p>
+                    <p class="modal-info-stats"><span class="stat-fluency"></span> people do not speak English fluently.</p>
+                    <p class="modal-info-social">You can make a difference.  8,291 people from Brooklyn  have already gotten involved.  [Facebook Like Button] to show your support, then let's get busy!</p>
+                    <p>Let us connect you to opportunities in your borough where you can improve your community.</p>
                     <div class="modal-text sources">
                         <p>1 http://www.nyc.gov/html/ceo/html/poverty/files.shtml
                         <br />2 https://data.cityofnewyork.us/City-Government/Demographics-and-profiles-at-the-Public-Use-Microd/7q5y-m6mr</p>
                     </div>
                 </div>
                 <div class="modal-info-bottom">
+                    <h1 class="modal-opportunities-title">Ways to help</h1>
+                    <p class="volunteer-match">
+                        <h3 class="margin-none">Volunteer to aid Chronically Homeless New Yorkers</h3>
+                        <h4 class="margin-none">with Lantern Community Services</h2>
+                        <p class="margin-none">Lantern Community Services champions the independence and well-being of New Yorkers who have been impacted by or threatened with homelessness.</p>
+                    </p>
+                    <p class="volunteer-match">
+                        <h3 class="margin-none">Volunteer to aid Chronically Homeless New Yorkers</h3>
+                        <h4 class="margin-none">with Lantern Community Services</h2>
+                        <p class="margin-none">Lantern Community Services champions the independence and well-being of New Yorkers who have been impacted by or threatened with homelessness.</p>
+                    </p>
+                    <p>More</p>
+                    <h1 class="modal-opportunities-title">Local Organizations</h1>
+                    <p class="organization">
+                        <h3 class="margin-none">Food pantry</h3>
+                        <h4 class="margin-none">Phone number - Address</h4>
+                        <p class="margin-none">The mission of Food Bank For New York City is to end hunger by organizing food, information and support for community survival and dignity.</p>
+                    </p>
+                    <p class="organization">
+                        <h3 class="margin-none">Food pantry</h3>
+                        <h4 class="margin-none">Phone number - Address</h4>
+                        <p class="margin-none">The mission of Food Bank For New York City is to end hunger by organizing food, information and support for community survival and dignity.</p>
+                    </p>
+                    <p>More</p>
                 </div>
             </div>
         </div>
     </div>
     <script>
+        var vis;
+        var layers;
+        var layersRaster = [];
+        var oldZoomLevel;
+        var oldLatLng;
         window.onload = function() {
-            var vis;
-            var layers;
 
+            // Custom colors
+            // C -> B, M -> R, Y -> G)
+            // Y -> R, M -> B, C -> G
+            // http://gis.stackexchange.com/questions/150057/set-cartocss-ranges-dynamically-for-choropleth
+            // http://bl.ocks.org/rgdonohue/d21239a488b5ab15dbbdf7567db1b086
             cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', {
                 zoom: 11,
                 center: [40.705, -73.86]
@@ -214,8 +286,28 @@
                 console.log(vis, layers);
 
                 layers[1].on('featureClick', function(e, latlng, pos, data, layer) {
+                  oldZoomLevel = vis.map.get('zoom');
+                  oldLatLng = vis.map.get('center');
+                  vis.map.set({center: latlng, zoom: 14});
                   showInfoModal(data);
                 });
+
+                // This bit is all a terrible hack and will be fixed later
+                layers[1].getSubLayer(1).show()
+                layers[1].getSubLayer(0).hide()
+                var headertext = $('.header .header-text')
+                var headertextoptions = ['fight poverty.', 'improve education.']
+                var headertextbool = true;
+                setInterval(function() {
+                    headertext.fadeTo(1500, 0, function (){
+                        headertext.text(headertextoptions[headertextbool ? 1 : 0]);
+                        headertextbool = !headertextbool;
+                        layers[1].getSubLayer(1).toggle()
+                        layers[1].getSubLayer(0).toggle()
+                    }).fadeTo(1500, 1);
+
+                }, 7500);
+
             });
 
             $('.modal-info').on('click', function(e) {
@@ -226,13 +318,14 @@
 
             function showInfoModal(data) {
                 $('.cartodb-tooltip').fadeOut(100);
-                console.log(vis.map);
-                console.log(vis.map.get('zoom'));
-                // debugger;
-                vis.map.set({zoom: 13});
                 var container = $('.modal-info');
-                console.log(data);
                 container.find('.modal-title').text(data.name);
+                container.find('.stat-poverty').text(Math.round(
+                    data.poverty_percentage_2010_2014*(data.total_population/100)
+                ).toLocaleString());
+                container.find('.stat-no-diploma').text(data.no_diploma.toLocaleString());
+                container.find('.stat-fluency').text(data.non_fluent_in_english.toLocaleString());
+                console.log('data.non_fluent_in_english.toLocaleString()', data.non_fluent_in_english.toLocaleString());
                 container.fadeIn(1000);
 
             }
@@ -240,6 +333,7 @@
             function hideInfoModal() {
                 $('.modal-info').fadeOut(1000);
                 $('.cartodb-tooltip').delay(1001).fadeIn(1000);
+                vis.map.set({center: oldLatLng, zoom: oldZoomLevel});
             }
 
             $('.call-to-action-text .intro-2').delay(1000).fadeTo(2000, 1);
