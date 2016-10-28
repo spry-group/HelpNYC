@@ -280,20 +280,28 @@
         var layersRaster = [];
         var oldZoomLevel;
         var oldLatLng;
+        var layerList = [
+            {
+                label: "poverty",
+                pos: 1
+            },{
+                label: "graduation",
+                pos: 0
+            }
+        ]
         window.onload = function() {
-
             // Custom colors
             // C -> B, M -> R, Y -> G)
             // Y -> R, M -> B, C -> G
             // http://gis.stackexchange.com/questions/150057/set-cartocss-ranges-dynamically-for-choropleth
             // http://bl.ocks.org/rgdonohue/d21239a488b5ab15dbbdf7567db1b086
+
             cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', {
                 zoom: 11,
                 center: [40.705, -73.86]
             }).done(function(visualization, maplayers) {
                 vis = visualization;
                 layers = maplayers;
-                console.log(vis, layers);
 
                 layers[1].on('featureClick', function(e, latlng, pos, data, layer) {
                   oldZoomLevel = vis.map.get('zoom');
@@ -309,15 +317,13 @@
                 var headertextoptions = ['fight poverty.', 'improve education.']
                 var headertextbool = true;
                 setInterval(function() {
-                    headertext.fadeTo(1500, 0, function (){
+                    crossFadeLayers()
+                    headertext.fadeTo(1000, 0, function (){
                         headertext.text(headertextoptions[headertextbool ? 1 : 0]);
                         headertextbool = !headertextbool;
-                        layers[1].getSubLayer(1).toggle()
-                        layers[1].getSubLayer(0).toggle()
-                    }).fadeTo(1500, 1);
+                    }).fadeTo(1000, 1);
 
-                }, 7500);
-
+                }, 13500);
             });
 
             $('.modal-info').on('click', function(e) {
@@ -325,6 +331,39 @@
                     hideInfoModal();
                 }
             });
+
+            function crossFadeLayers() {
+                var opacity = 1
+                var fadeOutTimer = setInterval(fadeOut, 20);
+                var fadeInTimer;
+                fadeOut();
+
+                function fadeOut() {
+                    if (opacity >= 0) {
+                        layers[1].setOpacity(opacity);
+                        opacity = opacity - .02;
+                    } else {
+                        clearInterval(fadeOutTimer);
+                        opacity = 0;
+                        layers[1].getSubLayer(layerList[1].pos).show()
+                        layers[1].getSubLayer(layerList[0].pos).hide()
+                        fadeIn();
+                        fadeInTimer = setInterval(fadeIn, 20);
+                    }
+                }
+
+                function fadeIn() {
+                    if (opacity <= 1) {
+                        layers[1].setOpacity(opacity);
+                        opacity = opacity + .02;
+                    } else {
+                        clearInterval(fadeInTimer);
+                        // Cycle the layer list for next time
+                        layerList.push(layerList.shift());
+                    }
+                }
+
+            }
 
             function showInfoModal(data) {
                 $('.cartodb-tooltip').fadeOut(100);
