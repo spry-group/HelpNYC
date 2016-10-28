@@ -83,6 +83,13 @@
             -moz-box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
         }
+        .modal-info-content .modal-close {
+            cursor: pointer;
+            margin: 0;
+            position: absolute;
+            right: .75em;
+            top: 1em;
+        }
         .modal-info-content .modal-text {
             text-align: left;
         }
@@ -94,6 +101,7 @@
             display: inline-block;
             min-height: 5em;
             text-align: left;
+            font-family: KeepCalm, Arial, Helvetica, sans-serif;
         }
         .modal-info-top {
             background: rgba(255,255,255,.8);
@@ -120,11 +128,6 @@
         }
         .margin-none {
             margin: 0;
-        }
-
-        .modal-info-stats, .mobile-info-social,
-
-        .prompt {
         }
 
         .center-v {
@@ -234,6 +237,7 @@
         <div class="modal modal-info">
             <div class="modal-info-content center-v">
                 <div class="modal-info-top">
+                    <h4 class="modal-close" onclick="hideInfoModal()">X</h4>
                     <h1 class="modal-title"></h1>
                     <p class="modal-info-stats"><span class="stat-poverty"></span> people within your community live below the poverty level.</p>
                     <p class="modal-info-stats"><span class="stat-no-diploma"></span> adults never completed High School, and didn't get their GED.</p>
@@ -326,12 +330,6 @@
                 }, 13500);
             });
 
-            $('.modal-info').on('click', function(e) {
-                if (e.target === this) {
-                    hideInfoModal();
-                }
-            });
-
             function crossFadeLayers() {
                 var opacity = 1
                 var fadeOutTimer = setInterval(fadeOut, 20);
@@ -374,15 +372,8 @@
                 ).toLocaleString());
                 container.find('.stat-no-diploma').text(data.no_diploma.toLocaleString());
                 container.find('.stat-fluency').text(data.non_fluent_in_english.toLocaleString());
-                console.log('data.non_fluent_in_english.toLocaleString()', data.non_fluent_in_english.toLocaleString());
                 container.fadeIn(1000);
 
-            }
-
-            function hideInfoModal() {
-                $('.modal-info').fadeOut(1000);
-                $('.cartodb-tooltip').delay(1001).fadeIn(1000);
-                vis.map.set({center: oldLatLng, zoom: oldZoomLevel});
             }
 
             $('.call-to-action-text .intro-2').delay(1000).fadeTo(2000, 1);
@@ -395,6 +386,11 @@
             });
             $('#map, .header .prompt').delay(11750).fadeTo(1250, 1)
             $('.modal-call-to-action').delay(11750).fadeOut(1250);
+        }
+        function hideInfoModal() {
+            $('.modal-info').fadeOut(1000);
+            $('.cartodb-tooltip').delay(1001).fadeIn(1000);
+            vis.map.set({center: oldLatLng, zoom: oldZoomLevel});
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
