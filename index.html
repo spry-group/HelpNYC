@@ -4,214 +4,10 @@
 <head>
     <title>HelpNYC Fight Poverty and Improve Education</title>
     <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+    <link rel="stylesheet" type="text/css" href="helpNYC.css">
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="Millions of New Yorkers live below the poverty line.  They are your neighbors.  You can help.  HelpNYC fight poverty and improve education.">
     <meta name="author" content="Paolo Unger Dvorchik">
-    <style>
-        @font-face {
-            font-family: KeepCalm;
-            src: url('fonts/KeepCalm-Medium.ttf') format('truetype'),
-                 url('fonts/KeepCalm-Medium.woff') format('woff');
-        }
-        body {
-            background: #333;
-            color: #FFF;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        .header {
-            height: 5em;
-            font-family: "Arial Black", "Gadget", sans-serif;
-            text-align: center;
-        }
-        .header .header-text {
-            position: relative;
-            top: -0.36em;
-            font-size: 1.5em;
-        }
-        .header .logo {
-            height: 2em;
-        }
-        .footer {
-            height:20vh;
-        }
-        .align-right {
-            text-align: right;
-        }
-        .modal {
-            height: 100%;
-            width: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 100;
-        }
-        .modal-call-to-action {
-            background-color:rgba(0, 0, 0, 0.65);
-            font-size: 2em;
-        }
-
-        .call-to-action-text {
-            text-align: center;
-            width: 95%;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            top: 50%;
-            transform: translateY(-75%);
-        }
-        .call-to-action-text h1 {
-            font-size: 2.25em;
-            /*2em for mobile*/
-        }
-        .call-to-action-text h3 {
-            font-size: 0.95em;
-        }
-        .invisible {
-            opacity: 0;
-        }
-        .modal-info {
-            display: none;
-            text-align: center;
-            color: #222;
-            background-color:rgba(0, 0, 0, 0.40);
-        }
-        .modal-info-content {
-            max-height: 90%;
-            overflow-y: scroll;
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto;
-            min-height: 5em;
-            -webkit-box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
-            -moz-box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
-            box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
-        }
-        .modal-info-content .modal-close {
-            cursor: pointer;
-            margin: 0;
-            position: absolute;
-            right: .75em;
-            top: 1em;
-        }
-        .modal-info-content .modal-text {
-            text-align: left;
-        }
-        .modal-info-content .sources {
-            font-size: 0.75em;
-        }
-        .modal-info-content .sources a {
-            text-decoration: none;
-        }
-        .modal-info-top, .modal-info-bottom {
-            padding: 0 2em;
-            display: inline-block;
-            min-height: 5em;
-            text-align: left;
-            font-family: KeepCalm, Arial, Helvetica, sans-serif;
-        }
-        .modal-info-top {
-            background: rgba(255,255,255,.8);
-            background: -moz-linear-gradient(top, rgba(255,255,255,.8) 0%, rgba(242,255,255,1) 100%);
-            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,.8)), color-stop(100%, rgba(242,255,255,1)));
-            background: -webkit-linear-gradient(top, rgba(255,255,255,.8) 0%, rgba(242,255,255,1) 100%);
-            background: -o-linear-gradient(top, rgba(255,255,255,.8) 0%, rgba(242,255,255,1) 100%);
-            background: -ms-linear-gradient(top, rgba(255,255,255,.8) 0%, rgba(242,255,255,1) 100%);
-            background: linear-gradient(to bottom, rgba(255,255,255,.8) 0%, rgba(242,255,255,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#f2ffff', GradientType=0 );
-        }
-        .modal-info-bottom {
-            background: rgba(242,255,255,1);
-            background: -moz-linear-gradient(top, rgba(242,255,255,1) 0%, rgba(255,255,255,.85) 100%);
-            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(242,255,255,1)), color-stop(100%, rgba(255,255,255,.85)));
-            background: -webkit-linear-gradient(top, rgba(242,255,255,1) 0%, rgba(255,255,255,.85) 100%);
-            background: -o-linear-gradient(top, rgba(242,255,255,1) 0%, rgba(255,255,255,.85) 100%);
-            background: -ms-linear-gradient(top, rgba(242,255,255,1) 0%, rgba(255,255,255,.85) 100%);
-            background: linear-gradient(to bottom, rgba(242,255,255,1) 0%, rgba(255,255,255,.85) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2ffff', endColorstr='#fff', GradientType=0 );
-        }
-        .modal-info-bottom h2, h3 {
-            margin: 0;
-        }
-        .margin-none {
-            margin: 0;
-        }
-
-        .center-v {
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        /* Mobile view */
-        @media (max-width: 750px) {
-            .modal-call-to-action {
-                font-size: 1em;
-            }
-            .call-to-action-text h3 {
-                font-size: 1.05em;
-            }
-            .hidden-on-mobile {
-                display: none;
-            }
-            .header .prompt h1 {
-                font-size: 1.5em;
-            }
-            .modal-info-content {
-                width: 90%
-            }
-           .header .logo {
-                height: 1.25em;
-            }
-            .header .header-text {
-                top: -0.355em;
-                font-size: 1em;
-            }
-        }
-
-        /* Cartodb overrides */
-        #map {
-            height: 84vh;
-            width: 100%;
-            padding: 0;
-            margin: 0;
-            color: #fff;
-            position: relative;
-        }
-        #map div.leaflet-tile-pane div.leaflet-tile-container. .leaflet-tile {
-            transition: opacity 500ms;
-            transition: all 5s ease-in ease-out;
-        }
-        #map .cartodb-map-wrapper .cartodb-tooltip {
-            min-width: 15em;
-            max-width: 25em;
-        }
-        .tooltip-title, .modal-title, .modal-opportunities-title {
-            font-size: 1.5em;
-            margin-bottom: 0.5em;
-            text-align: center;
-            width: 100%;
-            font-family: KeepCalm, Arial, Helvetica, sans-serif;
-        }
-        .tooltip-label, .tooltip-value {
-            display: inline-block;
-            margin-bottom: 0.25rem;
-        }
-        .tooltip-label {
-            width: 60%;
-            margin: 0 0 0.5em 2rem;
-        }
-        .tooltip-value {
-            display: inline-block;
-        }
-        .tooltip-more {
-            width: 100%;
-            text-align:center;
-            font-style: italic;
-        }
-        #map .cartodb-legend .legend-title {
-            text-align: center;
-        }
-    </style>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -243,203 +39,96 @@
         <div class="modal modal-info">
             <div class="modal-info-content center-v">
                 <div class="modal-info-top">
-                    <h4 class="modal-close" onclick="hideInfoModal()">X</h4>
-                    <h1 class="modal-title"></h1>
-                    <p class="modal-info-stats"><span class="stat-poverty"></span> people within your community live below the poverty level. <sup>1</sup></p>
-                    <p class="modal-info-stats"><span class="stat-no-diploma"></span> adults never completed High School, and didn't get their GED. <sup>2</sup></p>
-                    <p class="modal-info-stats"><span class="stat-fluency"></span> people do not speak English fluently. <sup>2</sup></p>
-                    <p class="modal-info-social">You can make a difference.  <!-- 8,291 people from Brooklyn have already gotten involved. --> Let us connect you to opportunities in your borough where you can improve your community.</p>
-                    <div class="align-right">
-                        <div class="fb-like" data-href="http://helpnyc.org/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="true"></div>
-                        <a class="twitter-share-button"
-                          href="https://twitter.com/intent/tweet"
-                          data-text="I'm helping to end poverty in my own neighborhood.  You can too!  Check out"
-                          data-url="http://helpnyc.org"
-                          data-hashtags="HelpNYC,Volunteer"
-                          data-size="large">
-                        Tweet</a>
+                    <h3 class="modal-close" onclick="hideInfoModal()">&#10006;</h3>
+                    <div class="stat-box">
+                        <div class="stat-box-text">
+                            <div class="stat stat-poverty"></div>
+                            <label>People within your community live below the poverty level. <sup>1</sup></label>
+                            <div class="stat stat-no-diploma"></div>
+                            <label>Adults never completed High School, and didn't get their GED. <sup>2</sup></label>
+                            <div class="stat stat-fluency"></div>
+                            <label>People do not speak English fluently.<sup>2</sup></label>
+                            <div class="modal-info-social">You can make a difference.  <!-- 8,291 people from Brooklyn have already gotten involved. --> Let us connect you to opportunities in your borough where you can improve your community.</div>
+                            <div class="align-center">
+                                <div class="fb-like" data-href="http://helpnyc.org/" data-layout="button" data-action="like" data-size="large" data-show-faces="false" data-share="true"></div>
+                                <a class="twitter-share-button"
+                                  href="https://twitter.com/intent/tweet"
+                                  data-text="I'm helping to end poverty in my own neighborhood.  You can too!  Check out"
+                                  data-url="http://helpnyc.org"
+                                  data-hashtags="HelpNYC,Volunteer"
+                                  data-size="large">
+                                Tweet</a>
+                            </div>
+                            <div class="modal-text sources">
+                                <p>1 <a href="http://www.nyc.gov/html/ceo/html/poverty/files.shtml" target="_blank">NYC Center for Economic Opportunity</a>
+                                <br />2 <a href="https://data.cityofnewyork.us/City-Government/Demographics-and-profiles-at-the-Public-Use-Microd/7q5y-m6mr" target="_blank">Demographics and profiles at the Public Use Microdata Area level</a></p>
+                                <p><a href="https://www.flickr.com/photos/rkarthick/6056923513/" target="_blank">Photo credit: Karthick Ramachandran</a></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-info-bottom">
-                    <h1 class="modal-opportunities-title">Ways to help</h1>
-                    <p class="volunteer-match">
-                        <h3 class="margin-none">Volunteer to aid Chronically Homeless New Yorkers</h3>
-                        <h4 class="margin-none">with Lantern Community Services</h2>
-                        <p class="margin-none">Lantern Community Services champions the independence and well-being of New Yorkers who have been impacted by or threatened with homelessness.</p>
-                    </p>
-                    <p class="volunteer-match">
-                        <h3 class="margin-none">Volunteer to aid Chronically Homeless New Yorkers</h3>
-                        <h4 class="margin-none">with Lantern Community Services</h2>
-                        <p class="margin-none">Lantern Community Services champions the independence and well-being of New Yorkers who have been impacted by or threatened with homelessness.</p>
-                    </p>
-                    <p>More</p>
-                    <h1 class="modal-opportunities-title">Local Organizations</h1>
-                    <p class="organization">
-                        <h3 class="margin-none">Food pantry</h3>
-                        <h4 class="margin-none">Phone number - Address</h4>
-                        <p class="margin-none">The mission of Food Bank For New York City is to end hunger by organizing food, information and support for community survival and dignity.</p>
-                    </p>
-                    <p class="organization">
-                        <h3 class="margin-none">Food pantry</h3>
-                        <h4 class="margin-none">Phone number - Address</h4>
-                        <p class="margin-none">The mission of Food Bank For New York City is to end hunger by organizing food, information and support for community survival and dignity.</p>
-                    </p>
-                    <p>More</p>
-                    <div class="modal-text sources">
-                        <p>1 <a href="http://www.nyc.gov/html/ceo/html/poverty/files.shtml">NYC Center for Economic Opportunity</a>
-                        <br />2 <a href="https://data.cityofnewyork.us/City-Government/Demographics-and-profiles-at-the-Public-Use-Microd/7q5y-m6mr">Demographics and profiles at the Public Use Microdata Area level</a></p>
+                    <div class="opportunities">
+                        <div class="opportunities-text">
+                            <h1 class="modal-title"></h1>
+                            <p class="volunteer-match">
+                                <h3 class="margin-none">Volunteer to aid Chronically Homeless New Yorkers</h3>
+                                <h4 class="margin-none">with Lantern Community Services</h4>
+                                <p class="margin-none">Lantern Community Services champions the independence and well-being of New Yorkers who have been impacted by or threatened with homelessness.</p>
+                            </p>
+                            <p class="volunteer-match">
+                                <h3 class="margin-none">Volunteer to aid Chronically Homeless New Yorkers</h3>
+                                <h4 class="margin-none">with Lantern Community Services</h4>
+                                <p class="margin-none">Lantern Community Services champions the independence and well-being of New Yorkers who have been impacted by or threatened with homelessness.</p>
+                            </p>
+                            <p class="volunteer-match">
+                                <h3 class="margin-none">Volunteer to aid Chronically Homeless New Yorkers</h3>
+                                <h4 class="margin-none">with Lantern Community Services</h4>
+                                <p class="margin-none">Lantern Community Services champions the independence and well-being of New Yorkers who have been impacted by or threatened with homelessness.</p>
+                            </p>
+                            <p class="more">More</p>
+                            <p class="organization">
+                                <h3 class="margin-none">Food pantry</h3>
+                                <h4 class="margin-none">Phone number - Address</h4>
+                                <p class="margin-none">The mission of Food Bank For New York City is to end hunger by organizing food, information and support for community survival and dignity.</p>
+                            </p>
+                            <p class="organization">
+                                <h3 class="margin-none">Food pantry</h3>
+                                <h4 class="margin-none">Phone number - Address</h4>
+                                <p class="margin-none">The mission of Food Bank For New York City is to end hunger by organizing food, information and support for community survival and dignity.</p>
+                            </p>
+                            <p class="more">More</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script>
-        var vis;
-        var layers;
-        var layersRaster = [];
-        var oldZoomLevel;
-        var oldLatLng;
-        var layerList = [
-            {
-                label: "poverty",
-                pos: 1
-            },{
-                label: "graduation",
-                pos: 0
-            }
-        ]
-        window.onload = function() {
-            // Custom colors
-            // C -> B, M -> R, Y -> G)
-            // Y -> R, M -> B, C -> G
-            // http://gis.stackexchange.com/questions/150057/set-cartocss-ranges-dynamically-for-choropleth
-            // http://bl.ocks.org/rgdonohue/d21239a488b5ab15dbbdf7567db1b086
-
-            cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', {
-                zoom: 11,
-                center: [40.705, -73.86]
-            }).done(function(visualization, maplayers) {
-                vis = visualization;
-                layers = maplayers;
-
-            vis.map.set({
-                minZoom: 10,
-                maxZoom: 15
-            });
-
-                layers[1].on('featureClick', function(e, latlng, pos, data, layer) {
-                  oldZoomLevel = vis.map.get('zoom');
-                  oldLatLng = vis.map.get('center');
-                  vis.map.set({center: latlng, zoom: 14});
-                  showInfoModal(data);
-                });
-
-                // This bit is all a terrible hack and will be fixed later
-                layers[1].getSubLayer(1).show()
-                layers[1].getSubLayer(0).hide()
-                var headertext = $('.header .header-text')
-                var headertextoptions = ['fight poverty.', 'improve education.']
-                var headertextbool = true;
-                setInterval(function() {
-                    crossFadeLayers()
-                    headertext.fadeTo(1000, 0, function (){
-                        headertext.text(headertextoptions[headertextbool ? 1 : 0]);
-                        headertextbool = !headertextbool;
-                    }).fadeTo(1000, 1);
-
-                }, 13500);
-            });
-
-            function crossFadeLayers() {
-                var opacity = 1
-                var fadeOutTimer = setInterval(fadeOut, 20);
-                var fadeInTimer;
-                fadeOut();
-
-                function fadeOut() {
-                    if (opacity >= 0) {
-                        layers[1].setOpacity(opacity);
-                        opacity = opacity - .02;
-                    } else {
-                        clearInterval(fadeOutTimer);
-                        opacity = 0;
-                        layers[1].getSubLayer(layerList[1].pos).show()
-                        layers[1].getSubLayer(layerList[0].pos).hide()
-                        fadeIn();
-                        fadeInTimer = setInterval(fadeIn, 20);
-                    }
-                }
-
-                function fadeIn() {
-                    if (opacity <= 1) {
-                        layers[1].setOpacity(opacity);
-                        opacity = opacity + .02;
-                    } else {
-                        clearInterval(fadeInTimer);
-                        // Cycle the layer list for next time
-                        layerList.push(layerList.shift());
-                    }
-                }
-
-            }
-
-            function showInfoModal(data) {
-                $('.cartodb-tooltip').fadeOut(100);
-                var container = $('.modal-info');
-                container.find('.modal-title').text(data.name);
-                container.find('.stat-poverty').text(Math.round(
-                    data.poverty_percentage_2010_2014*(data.total_population/100)
-                ).toLocaleString());
-                container.find('.stat-no-diploma').text(data.no_diploma.toLocaleString());
-                container.find('.stat-fluency').text(data.non_fluent_in_english.toLocaleString());
-                container.fadeIn(1000);
-
-            }
-
-            $('.call-to-action-text .intro-2').delay(1000).fadeTo(2000, 1);
-            $('.call-to-action-text .intro-3').delay(4000).fadeTo(2000, 1);
-            $('.call-to-action-text .intro-4').delay(6500).fadeTo(2000, 1);
-            $('.call-to-action-text .intro-5').delay(8750).fadeTo(2250, 1);
-            $('.modal-call-to-action').on('click', function(e) {
-                $('#map, .header .prompt').stop().fadeTo(1250, 1)
-                $('.modal-call-to-action').stop().fadeOut(1);
-            });
-            $('#map, .header .prompt').delay(11750).fadeTo(1250, 1)
-            $('.modal-call-to-action').delay(11750).fadeOut(1250);
-        }
-        function hideInfoModal() {
-            $('.modal-info').fadeOut(1000);
-            $('.cartodb-tooltip').delay(1001).fadeIn(1000);
-            vis.map.set({center: oldLatLng, zoom: oldZoomLevel});
-        }
-    </script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
-    <div id="fb-root"></div>
+    <script src="helpNYC.js"></script>
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "http://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
-      fjs.parentNode.insertBefore(js, fjs);
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "http://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8";
+        fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
-<script>window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
+    <script>window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
 
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
+        t._e = [];
+        t.ready = function(f) {
+        t._e.push(f);
+        };
 
-  return t;
-}(document, "script", "twitter-wjs"));</script>
+        return t;
+    }(document, "script", "twitter-wjs"));</script>
 </body>
 </html>

@@ -1,0 +1,350 @@
+@font-face {
+    font-family: KeepCalm;
+    src: url('fonts/KeepCalm-Medium.ttf') format('truetype'),
+         url('fonts/KeepCalm-Medium.woff') format('woff');
+}
+body {
+    background: #333;
+    color: #FFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+a, a:link, a:visited  {
+    color: #FFF;
+    text-decoration: none;
+}
+
+/* Helper classes */
+.margin-none {
+    margin: 0;
+}
+.center-v {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.align-center {
+    text-align: center;
+}
+.align-right {
+    text-align: right;
+}
+.invisible {
+    opacity: 0;
+}
+
+/* Large elements */
+.header {
+    height: 5em;
+    font-family: "Arial Black", "Gadget", sans-serif;
+    text-align: center;
+}
+.header .header-text {
+    position: relative;
+    top: -0.36em;
+    font-size: 1.5em;
+}
+.header .logo {
+    height: 2em;
+}
+.footer {
+    height:20vh;
+}
+.modal {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/* Call to action modal */
+.modal-call-to-action {
+    background-color:rgba(0, 0, 0, 0.65);
+    font-size: 2em;
+}
+.call-to-action-text {
+    text-align: center;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-75%);
+}
+.call-to-action-text h1 {
+    font-size: 2.25em;
+}
+.call-to-action-text h3 {
+    font-size: 0.95em;
+}
+
+/* Stats modal*/
+.modal-info {
+    display: none;
+    text-align: center;
+    color: #222;
+    background-color:rgba(0, 0, 0, 0.40);
+}
+.modal-info-content {
+    max-height: 90%;
+    overflow-y: auto;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 5em;
+    /* Box shadow*/
+    -webkit-box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 40px 1px rgba(0,0,0,0.75);
+    /* Background Gradient */
+    background: rgba(242,255,255,1);
+    background: -moz-linear-gradient(top, rgba(242,255,255,1) 0%, rgba(255,255,255,.75) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(242,255,255,1)), color-stop(100%, rgba(255,255,255,.75)));
+    background: -webkit-linear-gradient(top, rgba(242,255,255,1) 0%, rgba(255,255,255,.75) 100%);
+    background: -o-linear-gradient(top, rgba(242,255,255,1) 0%, rgba(255,255,255,.75) 100%);
+    background: -ms-linear-gradient(top, rgba(242,255,255,1) 0%, rgba(255,255,255,.75) 100%);
+    background: linear-gradient(to bottom, rgba(242,255,255,1) 0%, rgba(255,255,255,.75) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2ffff', endColorstr='#fff', GradientType=0 );
+    /* Transparent rounded border */
+    border: .25em solid rgba(0, 0, 0, 0.4);
+    -moz-background-clip: border;
+    -webkit-background-clip: border;
+    background-clip: border-box;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+    -moz-background-clip: content;
+    -webkit-background-clip: content;
+    background-clip: content-box;
+    border-radius: 1.3em;
+}
+.modal-info-content h3 {
+    font-size: 1.6em;
+}
+.modal-info-content h4 {
+    font-size: 1.2em;
+}
+.modal-info-content .stat-box {
+    width: 33%;
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+}
+.modal-info-content .stat-box-text {
+    color: #ffffff;
+    z-index: 2;
+    padding: 2em;
+    padding-top: 1em;
+    padding-bottom: 0em;
+    /* Add gradient over the image to increase readability. */
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.10) 90%, rgba(0,0,0,0) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.10) 90%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.10) 90%, rgba(0,0,0,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7500000', endColorstr='#00000000',GradientType=0 );
+    text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000;
+}
+.modal-info-content .stat-box .stat {
+    font-size: 4em;
+    font-weight: 900;
+    text-align: center;
+}
+.modal-info-content .stat-box label {
+    display: block;
+    margin-bottom: 1em;
+    font-size: 1.3em;
+}
+.modal-info-content .stat-box .modal-info-social {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 1em 0;
+}
+.modal-info-content .opportunities {
+    width: 66%;
+    display: inline-block;
+}
+.modal-info-content .opportunities .opportunities-text {
+    margin-left: 2.5em;
+    padding-right: 2.5em;
+}
+.modal-info-content .opportunities .opportunities-text h3 {
+    color: #222;
+}
+.modal-info-content .opportunities .opportunities-text h4 {
+    color: #444;
+}
+.opportunities .opportunities-text .more {
+    text-align: right;
+    font-weight: 700;
+    color: #0000b3;
+}
+.modal-info-content .modal-close {
+    cursor: pointer;
+    margin: 0;
+    position: absolute;
+    right: 1em;
+    top: 0.6em;
+    color: #e31a1c;
+    text-shadow: -1px -1px 1px #000, 1px -1px 1px #000, -1px 1px 1px #000, 1px 1px 1px #000;
+    opacity: 0.5;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+.modal-info-content .modal-close:hover {
+    opacity: 1;
+}
+
+.modal-info-content .modal-text {
+    text-align: left;
+}
+.modal-info-content .sources {
+    font-size: 0.65em;
+}
+.modal-info-top {
+    text-align: left;
+    background-image: url("images/brooklyn-bridge.jpg");
+    background-size: 33% auto;
+    background-repeat: no-repeat;
+}
+
+/* Mobile view */
+@media (max-width: 750px) {
+    body {
+        font-size: 0.2em;
+    }
+    .modal-call-to-action {
+        font-size: 5em;
+    }
+    .call-to-action-text h3 {
+        font-size: 1.05em;
+    }
+    .hidden-on-mobile {
+        display: none;
+    }
+    .header .prompt h1 {
+        font-size: 1.5em;
+    }
+    .modal-info-content {
+        width: 90%
+    }
+   .header .logo {
+        height: 3.75em;
+    }
+    .header .header-text {
+        font-size: 3.75em;
+    }
+    /* Hacky work around since the cartodb script sets display: block inline for some stupid reason */
+    .cartodb-tooltip {
+        width: 0;
+        height: 0;
+        overflow: hidden;
+    }
+    .cartodb-map-wrapper div.cartodb-legend-stack {
+        bottom: 1px;
+        right: 1px;
+    }
+}
+
+/* Small view */
+@media (min-width: 751px) and (max-width: 1023px){
+    body {
+        font-size: 0.35em;
+    }
+    .call-to-action-text {
+        font-size: 2em;
+    }
+}
+
+/* Medium view */
+@media (min-width: 1024px) and (max-width: 1400px){
+    body {
+        font-size: 0.60em;
+    }
+    .call-to-action-text {
+        font-size: 1.5em;
+    }
+}
+
+/* Large view */
+@media (min-width: 1401px) and (max-width: 1700px){
+    body {
+        font-size: 0.75em;
+    }
+}
+
+/* Default view */
+@media (min-width: 1701){
+    body {
+        font-size: 1em;
+    }
+}
+
+/* Make scrollbar work with rounded design */
+::-webkit-scrollbar {
+    width: 1.25em;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 1.5em;
+    border-radius: 1.5em;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 1.5em;
+    border-radius: 1.5em;
+    background: rgba(0,0,0,0.4);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0.2);
+}
+
+/* Cartodb overrides */
+#map {
+    height: 84vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    position: relative;
+}
+#map div.leaflet-tile-pane div.leaflet-tile-container. .leaflet-tile {
+    transition: opacity 500ms;
+    transition: all 5s ease-in ease-out;
+}
+#map .cartodb-map-wrapper .cartodb-tooltip {
+    min-width: 15em;
+    max-width: 25em;
+}
+.tooltip-title, .modal-title {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    text-align: center;
+    width: 100%;
+    font-family: KeepCalm, Arial, Helvetica, sans-serif;
+}
+.modal-title {
+    margin-top: 1em;
+    font-size: 2em;
+}
+.tooltip-label, .tooltip-value {
+    display: inline-block;
+    margin-bottom: 0.25rem;
+}
+.tooltip-label {
+    width: 60%;
+    margin: 0 0 0.5em 2rem;
+}
+.tooltip-value {
+    display: inline-block;
+}
+.tooltip-more {
+    width: 100%;
+    text-align:center;
+    font-style: italic;
+}
+#map .cartodb-legend .legend-title {
+    text-align: center;
+}
