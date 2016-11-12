@@ -10,7 +10,7 @@ var layerList = [
         label: "graduation",
         pos: 0
     }
-]
+];
 window.onload = function() {
     cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', {
         zoom: 11,
@@ -32,14 +32,14 @@ window.onload = function() {
         });
 
         // This bit is all a terrible hack and will be fixed later
-        layers[1].getSubLayer(1).show()
-        layers[1].getSubLayer(0).hide()
-        var headertext = $('.header .header-text')
-        var headertextoptions = ['fight poverty.', 'improve education.']
+        layers[1].getSubLayer(1).show();
+        layers[1].getSubLayer(0).hide();
+        var headertext = $('.header .header-text');
+        var headertextoptions = ['fight poverty.', 'improve education.'];
         var headertextbool = true;
 
         setInterval(function() {
-            crossFadeLayers()
+            crossFadeLayers();
             headertext.fadeTo(1000, 0, function (){
                 headertext.text(headertextoptions[headertextbool ? 1 : 0]);
                 headertextbool = !headertextbool;
@@ -58,7 +58,7 @@ window.onload = function() {
     // http://bl.ocks.org/rgdonohue/d21239a488b5ab15dbbdf7567db1b086
     // Potential color schemes: C -> B, M -> R, Y -> G and Y -> R, M -> B, C -> G
     function crossFadeLayers() {
-        var opacity = 1
+        var opacity = 1;
         var fadeOutTimer = setInterval(fadeOut, 20);
         var fadeInTimer;
         fadeOut();
@@ -66,12 +66,12 @@ window.onload = function() {
         function fadeOut() {
             if (opacity >= 0) {
                 layers[1].setOpacity(opacity);
-                opacity = opacity - .02;
+                opacity = opacity - 0.02;
             } else {
                 clearInterval(fadeOutTimer);
                 opacity = 0;
-                layers[1].getSubLayer(layerList[1].pos).show()
-                layers[1].getSubLayer(layerList[0].pos).hide()
+                layers[1].getSubLayer(layerList[1].pos).show();
+                layers[1].getSubLayer(layerList[0].pos).hide();
                 fadeIn();
                 fadeInTimer = setInterval(fadeIn, 20);
             }
@@ -80,7 +80,7 @@ window.onload = function() {
         function fadeIn() {
             if (opacity <= 1) {
                 layers[1].setOpacity(opacity);
-                opacity = opacity + .02;
+                opacity = opacity + 0.02;
             } else {
                 clearInterval(fadeInTimer);
                 // Cycle the layer list for next time
@@ -106,12 +106,12 @@ window.onload = function() {
     $('.call-to-action-text .intro-4').delay(6500).fadeTo(2000, 1);
     $('.call-to-action-text .intro-5').delay(8750).fadeTo(2250, 1);
     $('.modal-call-to-action').on('click', function(e) {
-        $('#map, .header .prompt').stop().fadeTo(1250, 1)
+        $('#map, .header .prompt, .footer').stop().fadeTo(1250, 1);
         $('.modal-call-to-action').stop().fadeOut(1);
     });
-    $('#map, .header .prompt').delay(11750).fadeTo(1250, 1)
+    $('#map, .header .prompt, .footer').delay(11750).fadeTo(1250, 1);
     $('.modal-call-to-action').delay(11750).fadeOut(1250);
-}
+};
 
 function hideInfoModal() {
     $('.modal-info').fadeOut(1000);

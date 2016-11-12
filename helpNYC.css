@@ -47,7 +47,11 @@ a, a:link, a:visited  {
     height: 2em;
 }
 .footer {
-    height:20vh;
+    padding-top: 0.5em;
+}
+.footer img {
+    height: 3em;
+    margin: 0.175em 0.25em 0 0.25em;
 }
 .modal {
     height: 100%;
@@ -240,6 +244,10 @@ a, a:link, a:visited  {
         top: -0.4em;
         font-size: 3.75em;
     }
+    .footer img {
+        height: 4.3em;
+        margin: 2em 0.6em 0 0.6em;
+    }
     /* Hacky work around since the cartodb script sets display: block inline for some stupid reason */
     .cartodb-tooltip {
         width: 0;
@@ -270,6 +278,10 @@ a, a:link, a:visited  {
     .header .logo {
         height: 3.5em;
     }
+    .footer img {
+        height: 5em;
+        margin: 1em 1em 0 1em;
+    }
 }
 
 /* Medium view */
@@ -280,12 +292,20 @@ a, a:link, a:visited  {
     .call-to-action-text {
         font-size: 1.5em;
     }
+    .footer img {
+        height: 4.7em;
+        margin: .15em 0.4em 0 0.4em;
+    }
 }
 
 /* Large view */
 @media (min-width: 1401px) and (max-width: 1700px){
     body {
         font-size: 0.75em;
+    }
+    .footer img {
+        height: 4em;
+        margin: 0.25em 0.35em 0 0.35em;
     }
 }
 
