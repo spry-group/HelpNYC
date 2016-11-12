@@ -230,10 +230,14 @@ a, a:link, a:visited  {
     .modal-info-content {
         width: 90%
     }
-   .header .logo {
+    .header {
+        height: 7em;
+    }
+    .header .logo {
         height: 3.75em;
     }
     .header .header-text {
+        top: -0.4em;
         font-size: 3.75em;
     }
     /* Hacky work around since the cartodb script sets display: block inline for some stupid reason */
@@ -255,6 +259,16 @@ a, a:link, a:visited  {
     }
     .call-to-action-text {
         font-size: 2em;
+    }
+    .header {
+        height: 7.5em;
+    }
+    .header .header-text {
+        top: -0.39em;
+        font-size: 2.5em;
+    }
+    .header .logo {
+        height: 3.5em;
     }
 }
 
