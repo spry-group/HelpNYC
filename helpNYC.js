@@ -12,40 +12,39 @@ var layerList = [
     }
 ];
 window.onload = function() {
-    cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', {
-        zoom: 11,
-        center: [40.705, -73.86]
-    }).done(function(visualization, maplayers) {
-        vis = visualization;
-        layers = maplayers;
+    cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', mapStartingParams()
+        ).done(function(visualization, maplayers) {
+            vis = visualization;
+            layers = maplayers;
 
-        vis.map.set({
-            minZoom: 10,
-            maxZoom: 15
-        });
+            vis.map.set({
+                minZoom: 10,
+                maxZoom: 15
+            });
 
-        layers[1].on('featureClick', function(e, latlng, pos, data, layer) {
-            oldZoomLevel = vis.map.get('zoom');
-            oldLatLng = vis.map.get('center');
-            vis.map.set({center: latlng, zoom: 14});
-            showInfoModal(data);
-        });
+            layers[1].on('featureClick', function(e, latlng, pos, data, layer) {
+                oldZoomLevel = vis.map.get('zoom');
+                oldLatLng = vis.map.get('center');
+                vis.map.set({center: latlng, zoom: 14});
+                showInfoModal(data);
+            });
 
-        // This bit is all a terrible hack and will be fixed later
-        layers[1].getSubLayer(1).show();
-        layers[1].getSubLayer(0).hide();
-        var headertext = $('.header .header-text');
-        var headertextoptions = ['fight poverty.', 'improve education.'];
-        var headertextbool = true;
+            // This bit is all a terrible hack and will be fixed later
+            layers[1].getSubLayer(1).show();
+            layers[1].getSubLayer(0).hide();
+            var headertext = $('.header .header-text');
+            var headertextoptions = ['fight poverty.', 'improve education.'];
+            var headertextbool = true;
 
-        setInterval(function() {
-            crossFadeLayers();
-            headertext.fadeTo(1000, 0, function (){
-                headertext.text(headertextoptions[headertextbool ? 1 : 0]);
-                headertextbool = !headertextbool;
-            }).fadeTo(1000, 1);
-        }, 13500);
-    });
+            setInterval(function() {
+                crossFadeLayers();
+                headertext.fadeTo(1000, 0, function (){
+                    headertext.text(headertextoptions[headertextbool ? 1 : 0]);
+                    headertextbool = !headertextbool;
+                }).fadeTo(1000, 1);
+            }, 13500);
+        }
+    );
 
     $('.modal-info').on('click', function(e) {
         if (e.target === this) {
@@ -99,6 +98,20 @@ window.onload = function() {
         container.find('.stat-no-diploma').text(data.no_diploma.toLocaleString());
         container.find('.stat-fluency').text(data.non_fluent_in_english.toLocaleString());
         container.fadeIn(1000);
+    }
+
+    function mapStartingParams() {
+        var zoom = 11;
+        var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+        if (windowHeight < 750) {
+            zoom = 10;
+        }
+
+        return {
+            zoom: zoom,
+            center: [40.71, -73.93]
+        };
     }
 
     $('.call-to-action-text .intro-2').delay(1000).fadeTo(2000, 1);
