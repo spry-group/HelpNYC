@@ -167,14 +167,16 @@ a, a:link, a:visited  {
     margin-left: 2.5em;
     padding-right: 2.5em;
 }
-.modal-info-content .opportunities .opportunities-text h3 {
+.modal-info-content .opportunities .opportunities-text h3 a {
     color: #222;
 }
-.modal-info-content .opportunities .opportunities-text h4 {
+.modal-info-content .opportunities .opportunities-text h4 a {
     color: #444;
 }
 .opportunities .opportunities-text .more {
     text-align: right;
+}
+.opportunities .opportunities-text .more a {
     font-weight: 700;
     color: #0000b3;
 }
