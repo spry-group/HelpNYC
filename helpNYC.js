@@ -11,6 +11,20 @@ var layerList = [
         pos: 0
     }
 ];
+
+// Use page visibility api to prevent ugly choropleth flickering when tabbing out and back
+var hidden, visibilityChange, choroplethTransitionInterval;
+if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
+  hidden = "hidden";
+  visibilityChange = "visibilitychange";
+} else if (typeof document.msHidden !== "undefined") {
+  hidden = "msHidden";
+  visibilityChange = "msvisibilitychange";
+} else if (typeof document.webkitHidden !== "undefined") {
+  hidden = "webkitHidden";
+  visibilityChange = "webkitvisibilitychange";
+}
+
 window.onload = function() {
     cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', mapStartingParams()
         ).done(function(visualization, maplayers) {
@@ -32,17 +46,30 @@ window.onload = function() {
             // This bit is all a terrible hack and will be fixed later
             layers[1].getSubLayer(1).show();
             layers[1].getSubLayer(0).hide();
-            var headertext = $('.header .header-text');
-            var headertextoptions = ['fight poverty.', 'improve education.'];
-            var headertextbool = true;
+            var headerText = $('.header .header-text');
+            var headerTextOptions = ['fight poverty.', 'improve education.'];
+            var headerTextBool = true;
 
-            setInterval(function() {
-                crossFadeLayers();
-                headertext.fadeTo(1000, 0, function (){
-                    headertext.text(headertextoptions[headertextbool ? 1 : 0]);
-                    headertextbool = !headertextbool;
-                }).fadeTo(1000, 1);
-            }, 13500);
+            // Use page visibility api to prevent ugly choropleth flickering when tabbing out and back
+            if (typeof document.addEventListener !== "undefined" || typeof document[hidden] !== "undefined") {
+                document.addEventListener(visibilityChange, toggleChoroplethTransitions, false);
+            }
+
+            function toggleChoroplethTransitions() {
+                if (document[hidden]) {
+                    clearInterval(choroplethTransitionInterval);
+                } else {
+                    choroplethTransitionInterval = startChoroplethTransitions();
+                }
+            }
+
+            choroplethTransitionInterval = startChoroplethTransitions();
+
+            function startChoroplethTransitions() {
+                return setInterval(function() {
+                    crossFadeLayers(headerText, headerTextOptions, headerTextBool);
+                }, 1350);
+            }
         }
     );
 
@@ -56,10 +83,14 @@ window.onload = function() {
     // http://gis.stackexchange.com/questions/150057/set-cartocss-ranges-dynamically-for-choropleth
     // http://bl.ocks.org/rgdonohue/d21239a488b5ab15dbbdf7567db1b086
     // Potential color schemes: C -> B, M -> R, Y -> G and Y -> R, M -> B, C -> G
-    function crossFadeLayers() {
+    function crossFadeLayers(headerText, headerTextOptions, headerTextBool) {
         var opacity = 1;
         var fadeOutTimer = setInterval(fadeOut, 20);
         var fadeInTimer;
+        headerText.fadeTo(1000, 0, function (){
+            headerText.text(headerTextOptions[headerTextBool ? 1 : 0]);
+            headerTextBool = !headerTextBool;
+        }).fadeTo(1000, 1);
         fadeOut();
 
         function fadeOut() {
