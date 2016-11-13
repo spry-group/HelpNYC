@@ -31,6 +31,9 @@ a, a:link, a:visited  {
 .invisible {
     opacity: 0;
 }
+.hidden-on-desktop {
+    display: none;
+}
 
 /* Large elements */
 .header {
@@ -219,23 +222,17 @@ a, a:link, a:visited  {
     body {
         font-size: 0.2em;
     }
-    .modal-call-to-action {
-        font-size: 5em;
-    }
-    .call-to-action-text h3 {
-        font-size: 1.05em;
-    }
     .hidden-on-mobile {
         display: none;
+    }
+    .hidden-on-desktop {
+        display: initial;
     }
     .header .prompt h1 {
         font-size: 1.5em;
     }
-    .modal-info-content {
-        width: 90%
-    }
     .header {
-        height: 7em;
+        height: 5em;
     }
     .header .logo {
         height: 3.75em;
@@ -247,6 +244,89 @@ a, a:link, a:visited  {
     .footer img {
         height: 4.3em;
         margin: 2em 0.6em 0 0.6em;
+    }
+    .modal-call-to-action {
+        font-size: 5em;
+    }
+    .call-to-action-text h3 {
+        font-size: 1.05em;
+    }
+    .modal-info-top {
+        background: none;
+    }
+    .modal-info-content {
+        width: 100%;
+        max-height: 100%;
+    }
+    .modal-info-content .modal-close {
+        opacity: 1;
+        font-size: 6em;
+        top: 0.5em;
+        right: 0.75em;
+        color: #fff;
+    }
+    .modal-info-content .stat-box {
+        width: 100%;
+        background-image: url("images/modal-background-hoz.jpg");
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        font-size: 2.5em;
+    }
+    .modal-info-content .stat-box label {
+        font-size: 2.25em;
+        margin-bottom: 0.25em;
+    }
+    .modal-info-content .stat-box .stat-box-text {
+        background: -moz-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.10) 80%, rgba(0,0,0,0) 100%);
+        background: -webkit-linear-gradient(top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.10) 80%, rgba(0,0,0,0) 100%);
+        background: linear-gradient(to bottom, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.10) 80%, rgba(0,0,0,0) 100%);
+    }
+    .modal-info-content .stat-box .modal-info-social {
+        font-size: 2.58em;
+        margin: 0.5em 0;
+    }
+    #twitter-widget-0 {
+        margin-left: 2px;
+        vertical-align: middle;
+    }
+    .modal-info-content .sources {
+        font-size: 1.25em;
+    }
+    .modal-info-content .opportunities:before {
+        content:' ';
+        position:absolute;
+        width: 0; height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid #222;
+        left:50%; margin-left:-10px;
+        margin-top: -2px;
+    }
+
+    .modal-info-content .opportunities {
+        font-size: 5em;
+        width: 100%;
+    }
+    .modal-info-content .opportunities .opportunities-text {
+        margin-left: 0.5em;
+        padding-right: 0.5em;
+    }
+    .modal-title {
+        margin: 0.5em 0;
+        font-size: 1.5em;
+    }
+    .modal-info-content h3 {
+        font-size: 1.4em;
+    }
+    .modal-info-content h4 {
+        margin-top: 0.25em;
+    }
+    .opportunities .opportunities-text p {
+        margin: 0.5em 0 1.75em 0;
+    }
+    .opportunities .opportunities-text .more {
+        text-align: center;
+        font-size: 1.25em;
     }
     /* Hacky work around since the cartodb script sets display: block inline for some stupid reason */
     .cartodb-tooltip {
@@ -353,6 +433,9 @@ a, a:link, a:visited  {
 #map .cartodb-map-wrapper .cartodb-tooltip {
     min-width: 15em;
     max-width: 25em;
+}
+#map .leaflet-bottom.leaflet-right {
+    display: none;
 }
 .tooltip-title, .modal-title {
     font-size: 1.5em;

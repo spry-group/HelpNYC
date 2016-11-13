@@ -110,7 +110,7 @@ window.onload = function() {
 
         return {
             zoom: zoom,
-            center: [40.71, -73.93]
+            center: [40.71, -73.95]
         };
     }
 
