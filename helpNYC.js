@@ -13,7 +13,7 @@ var layerList = [
     },
     {
         pos: 2,
-        label: "increase literacy."
+        label: "increase fluency."
     }
 ];
 
