@@ -4,11 +4,16 @@ var oldZoomLevel;
 var oldLatLng;
 var layerList = [
     {
-        label: "poverty",
-        pos: 1
-    },{
-        label: "graduation",
-        pos: 0
+        pos: 0,
+        label: "improve education."
+    },
+    {
+        pos: 1,
+        label: "fight poverty."
+    },
+    {
+        pos: 2,
+        label: "increase literacy."
     }
 ];
 
@@ -44,11 +49,11 @@ window.onload = function() {
             });
 
             // This bit is all a terrible hack and will be fixed later
-            layers[1].getSubLayer(1).show();
-            layers[1].getSubLayer(0).hide();
+            layers[1].getSubLayer(2).hide();
+            layers[1].getSubLayer(1).hide();
+            layers[1].getSubLayer(0).show();
             var headerText = $('.header .header-text');
-            var headerTextOptions = ['fight poverty.', 'improve education.'];
-            var headerTextBool = true;
+            headerText.text(layerList[0].label);
 
             // Use page visibility api to prevent ugly choropleth flickering when tabbing out and back
             if (typeof document.addEventListener !== "undefined" || typeof document[hidden] !== "undefined") {
@@ -67,8 +72,8 @@ window.onload = function() {
 
             function startChoroplethTransitions() {
                 return setInterval(function() {
-                    crossFadeLayers(headerText, headerTextOptions, headerTextBool);
-                }, 1350);
+                    crossFadeLayers(headerText);
+                }, 13500);
             }
         }
     );
@@ -83,13 +88,12 @@ window.onload = function() {
     // http://gis.stackexchange.com/questions/150057/set-cartocss-ranges-dynamically-for-choropleth
     // http://bl.ocks.org/rgdonohue/d21239a488b5ab15dbbdf7567db1b086
     // Potential color schemes: C -> B, M -> R, Y -> G and Y -> R, M -> B, C -> G
-    function crossFadeLayers(headerText, headerTextOptions, headerTextBool) {
+    function crossFadeLayers(headerText) {
         var opacity = 1;
         var fadeOutTimer = setInterval(fadeOut, 20);
         var fadeInTimer;
         headerText.fadeTo(1000, 0, function (){
-            headerText.text(headerTextOptions[headerTextBool ? 1 : 0]);
-            headerTextBool = !headerTextBool;
+            headerText.text(layerList[1].label);
         }).fadeTo(1000, 1);
         fadeOut();
 
