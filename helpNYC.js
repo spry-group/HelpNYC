@@ -1,4 +1,4 @@
-'use strict';
+ 'use strict';
 /************************************************************
 * TODO:                                                     *
 * Refactor into Angular 2                                   *
@@ -6,10 +6,10 @@
 * Webpack                                                   *
 * Use chronjob to auto publish new opportunities via git    *
 * Turn css into sass and DRY it out                         *
-* Force modal scroll to top when re-opening                 *
 * Work on more opportunties and foodbank links              *
 * Spellcheck all of the things                              *
 * Find a solution for overly long descriptions              *
+* Prevent one org from taking over all the listings         *
 * Release and promote                                       *
 * More social media tie ins and feedback                    *
 * Rewrite map to enable proper crossfade                    *
@@ -21,7 +21,6 @@ var oldZoomLevel;
 var oldLatLng;
 var opportunitiesDatedPromise = $.getJSON('../opportunityJson/opportunitiesDated.json');
 var opportunitiesOngoingPromise = $.getJSON('../opportunityJson/opportunitiesOngoing.json');
-var matchesContainer = $('.volunteer-matches');
 var layerList = [
     {
         pos: 0,
@@ -147,6 +146,8 @@ window.onload = function() {
 
     function showInfoModal(data) {
         $('.cartodb-tooltip, .cartodb-legend-stack').fadeOut(100);
+        // Scroll back to the top of the modal
+        window.scrollTo(0, 0);
         var container = $('.modal-info');
         container.find('.modal-title').text(data.name);
         container.find('.stat-poverty').text(Math.round(
@@ -193,8 +194,7 @@ function hideInfoModal() {
 function _getOpportunities(data) {
     let zips = data.zipcodes.split(', ');
     let opportunities = [];
-    matchesContainer.empty();
-    matchesContainer.append('<h3>Loading...</h3>');
+    $('.volunteer-matches').html('<h3>Loading...</h3>');
 
     // TODO make this dry and have the appending happen in a called function
     opportunitiesDatedPromise.then(opportunitiesDated => {
@@ -220,6 +220,7 @@ function _getOpportunities(data) {
 
 function _appendOpportunities(opportunities) {
     // TODO: after switching to angular 2 just use an *ngFor instead of this crap
+    let matchesContainer = $('.volunteer-matches');
     matchesContainer.empty();
     opportunities.slice(0, 7).forEach(opportunity => {
         matchesContainer.append(
@@ -234,4 +235,7 @@ function _appendOpportunities(opportunities) {
             '</div>'
         )
     });
+
+    // Scroll back to the top of the modal
+    $('.modal-info-content').scrollTop(0)
 }
