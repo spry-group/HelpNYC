@@ -1,37 +1,43 @@
+'use strict';
 var vis;
 var layers;
 var oldZoomLevel;
 var oldLatLng;
+var opportunitiesDatedPromise = $.getJSON('../opportunityJson/opportunitiesOngoing.json');
+var opportunitiesOngoingPromise = $.getJSON('../opportunityJson/opportunitiesOngoing.json');
+var matchesContainer = $('.volunteer-matches');
 var layerList = [
     {
         pos: 0,
-        label: "improve education."
+        label: 'improve education.'
     },
     {
         pos: 1,
-        label: "fight poverty."
+        label: 'fight poverty.'
     },
     {
         pos: 2,
-        label: "increase fluency."
+        label: 'increase fluency.'
     }
 ];
 
 // Use page visibility api to prevent ugly choropleth flickering when tabbing out and back
 var hidden, visibilityChange, choroplethTransitionInterval;
-if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support
-  hidden = "hidden";
-  visibilityChange = "visibilitychange";
-} else if (typeof document.msHidden !== "undefined") {
-  hidden = "msHidden";
-  visibilityChange = "msvisibilitychange";
-} else if (typeof document.webkitHidden !== "undefined") {
-  hidden = "webkitHidden";
-  visibilityChange = "webkitvisibilitychange";
+if (typeof document.hidden !== 'undefined') { // Opera 12.10 and Firefox 18 and later support
+  hidden = 'hidden';
+  visibilityChange = 'visibilitychange';
+} else if (typeof document.msHidden !== 'undefined') {
+  hidden = 'msHidden';
+  visibilityChange = 'msvisibilitychange';
+} else if (typeof document.webkitHidden !== 'undefined') {
+  hidden = 'webkitHidden';
+  visibilityChange = 'webkitvisibilitychange';
 }
 
 window.onload = function() {
-    cartodb.createVis('map', 'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json', mapStartingParams()
+    cartodb.createVis('map',
+        'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json',
+        mapStartingParams()
         ).done(function(visualization, maplayers) {
             vis = visualization;
             layers = maplayers;
@@ -133,6 +139,43 @@ window.onload = function() {
         container.find('.stat-no-diploma').text(data.no_diploma.toLocaleString());
         container.find('.stat-fluency').text(data.non_fluent_in_english.toLocaleString());
         container.fadeIn(1000);
+        let zips = data.zipcodes.split(', ');
+        let opportunities = [];
+        matchesContainer.empty();
+        matchesContainer.append('<h3>Loading...</h3>');
+        opportunitiesDatedPromise.then(opportunitiesDated => {
+            zips.forEach(zip => {
+                if (zip in opportunitiesDated) {
+                    opportunities.push(...opportunitiesDated[zip] || []);
+                }
+            });
+            if (opportunities.length < 7) {
+                opportunitiesOngoingPromise.then(opportunitiesOngoing => {
+                    zips.forEach(zip => {
+                        if (zip in opportunitiesOngoing) {
+                            opportunities.push(...opportunitiesOngoing[zip]);
+                        }
+                    });
+                });
+            }
+
+            // TODO: after switching to angular 2 just use an *ngFor instead of this crap
+            matchesContainer.empty();
+            console.log(opportunities.length)
+            opportunities.slice(0, 7).forEach(opportunity => {
+                matchesContainer.append(
+                    '<div class="volunteer-match">' +
+                        '<h3 class="margin-none">' +
+                            '<a href="' + decodeURIComponent(opportunity.link) + '" target="_blank">' +
+                                opportunity.title +
+                            '</a>' +
+                        '</h3>' +
+                        '<h4 class="margin-none">' + opportunity.org + '</h4>' +
+                        '<p class="margin-none">' + opportunity.description + '</p>' +
+                    '</div>'
+                )
+            });
+        });
     }
 
     function mapStartingParams() {

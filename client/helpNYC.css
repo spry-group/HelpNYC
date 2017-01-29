@@ -177,15 +177,20 @@ a, a:link, a:visited  {
 .modal-info-content .opportunities .opportunities-text h3 a {
     color: #222;
 }
-.modal-info-content .opportunities .opportunities-text h4 a {
+.modal-info-content .opportunities .opportunities-text h4 {
     color: #444;
+}
+.modal-info-content .opportunities .opportunities-text .volunteer-match {
+    margin-top: 1.5em;
 }
 .opportunities .opportunities-text .more {
     text-align: right;
+    padding: 2em 0 3em 0em;
 }
 .opportunities .opportunities-text .more a {
     font-weight: 700;
     color: #0000b3;
+    font-size: 2em;
 }
 .modal-info-content .modal-close {
     cursor: pointer;
