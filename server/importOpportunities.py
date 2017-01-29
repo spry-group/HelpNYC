@@ -87,9 +87,9 @@ class importOpportunities():
 
     def writeResultsToFile(self, combinedResults):
         if self.ongoing:
-            datafile = os.path.join(os.getcwd(), 'ongoingOpportunities.json')
+            datafile = os.path.join(os.getcwd(), 'opportunityJson', 'opportunitiesOngoing.json')
         else:
-            datafile = os.path.join(os.getcwd(), 'datedOpportunities.json')
+            datafile = os.path.join(os.getcwd(), 'opportunityJson', 'opportunitiesDated.json')
 
         with open(datafile, 'w') as outfile:
                 json.dump(combinedResults, outfile)
