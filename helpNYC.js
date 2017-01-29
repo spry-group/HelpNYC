@@ -139,43 +139,7 @@ window.onload = function() {
         container.find('.stat-no-diploma').text(data.no_diploma.toLocaleString());
         container.find('.stat-fluency').text(data.non_fluent_in_english.toLocaleString());
         container.fadeIn(1000);
-        let zips = data.zipcodes.split(', ');
-        let opportunities = [];
-        matchesContainer.empty();
-        matchesContainer.append('<h3>Loading...</h3>');
-        opportunitiesDatedPromise.then(opportunitiesDated => {
-            zips.forEach(zip => {
-                if (zip in opportunitiesDated) {
-                    opportunities.push(...opportunitiesDated[zip] || []);
-                }
-            });
-            if (opportunities.length < 7) {
-                opportunitiesOngoingPromise.then(opportunitiesOngoing => {
-                    zips.forEach(zip => {
-                        if (zip in opportunitiesOngoing) {
-                            opportunities.push(...opportunitiesOngoing[zip]);
-                        }
-                    });
-                });
-            }
-
-            // TODO: after switching to angular 2 just use an *ngFor instead of this crap
-            matchesContainer.empty();
-            console.log(opportunities.length)
-            opportunities.slice(0, 7).forEach(opportunity => {
-                matchesContainer.append(
-                    '<div class="volunteer-match">' +
-                        '<h3 class="margin-none">' +
-                            '<a href="' + decodeURIComponent(opportunity.link) + '" target="_blank">' +
-                                opportunity.title +
-                            '</a>' +
-                        '</h3>' +
-                        '<h4 class="margin-none">' + opportunity.org + '</h4>' +
-                        '<p class="margin-none">' + opportunity.description + '</p>' +
-                    '</div>'
-                )
-            });
-        });
+        _getOpportunities(data);
     }
 
     function mapStartingParams() {
@@ -208,4 +172,50 @@ function hideInfoModal() {
     $('.modal-info').fadeOut(1000);
     $('.cartodb-tooltip, .cartodb-legend-stack').delay(1001).fadeIn(1000);
     vis.map.set({center: oldLatLng, zoom: oldZoomLevel});
+}
+
+function _getOpportunities(data) {
+    let zips = data.zipcodes.split(', ');
+    let opportunities = [];
+    matchesContainer.empty();
+    matchesContainer.append('<h3>Loading...</h3>');
+
+    // TODO make this dry and have the appending happen in a called function
+    opportunitiesDatedPromise.then(opportunitiesDated => {
+        zips.forEach(zip => {
+            if (zip in opportunitiesDated) {
+                opportunities.push(...opportunitiesDated[zip] || []);
+            }
+        });
+        if (opportunities.length < 7) {
+            opportunitiesOngoingPromise.then(opportunitiesOngoing => {
+                zips.forEach(zip => {
+                    if (zip in opportunitiesOngoing) {
+                        opportunities.push(...opportunitiesOngoing[zip]);
+                    }
+                });
+                _appendOpportunities(opportunities);
+            });
+        } else {
+            _appendOpportunities(opportunities);
+        }
+    });
+}
+
+function _appendOpportunities(opportunities) {
+    // TODO: after switching to angular 2 just use an *ngFor instead of this crap
+    matchesContainer.empty();
+    opportunities.slice(0, 7).forEach(opportunity => {
+        matchesContainer.append(
+            '<div class="volunteer-match">' +
+                '<h3 class="margin-none">' +
+                    '<a href="' + decodeURIComponent(opportunity.link) + '" target="_blank">' +
+                        opportunity.title +
+                    '</a>' +
+                '</h3>' +
+                '<h4 class="margin-none">' + opportunity.org + '</h4>' +
+                '<p class="margin-none opportunity-description">' + opportunity.description + '</p>' +
+            '</div>'
+        )
+    });
 }

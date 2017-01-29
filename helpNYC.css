@@ -183,6 +183,9 @@ a, a:link, a:visited  {
 .modal-info-content .opportunities .opportunities-text .volunteer-match {
     margin-top: 1.5em;
 }
+.opportunities .opportunities-text p {
+    margin: 0.5em 0 1.75em 0;
+}
 .opportunities .opportunities-text .more {
     text-align: right;
     padding: 2em 0 3em 0em;
@@ -190,7 +193,11 @@ a, a:link, a:visited  {
 .opportunities .opportunities-text .more a {
     font-weight: 700;
     color: #0000b3;
-    font-size: 2em;
+    font-size: 1.5em;
+}
+.opportunities .opportunity-description {
+    max-height: 5.75em;
+    overflow: hidden;
 }
 .modal-info-content .modal-close {
     cursor: pointer;
@@ -325,13 +332,6 @@ a, a:link, a:visited  {
     }
     .modal-info-content h4 {
         margin-top: 0.25em;
-    }
-    .opportunities .opportunities-text p {
-        margin: 0.5em 0 1.75em 0;
-    }
-    .opportunities .opportunities-text .more {
-        text-align: center;
-        font-size: 1.25em;
     }
     /* Hacky work around since the cartodb script sets display: block inline for some stupid reason */
     .cartodb-tooltip {
