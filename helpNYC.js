@@ -3,7 +3,7 @@ var vis;
 var layers;
 var oldZoomLevel;
 var oldLatLng;
-var opportunitiesDatedPromise = $.getJSON('../opportunityJson/opportunitiesOngoing.json');
+var opportunitiesDatedPromise = $.getJSON('../opportunityJson/opportunitiesDated.json');
 var opportunitiesOngoingPromise = $.getJSON('../opportunityJson/opportunitiesOngoing.json');
 var matchesContainer = $('.volunteer-matches');
 var layerList = [
