@@ -1,4 +1,20 @@
 'use strict';
+/************************************************************
+* TODO:                                                     *
+* Refactor into Angular 2                                   *
+* Host on github pages and enable gzip                      *
+* Webpack                                                   *
+* Use chronjob to auto publish new opportunities via git    *
+* Turn css into sass and DRY it out                         *
+* Force modal scroll to top when re-opening                 *
+* Work on more opportunties and foodbank links              *
+* Spellcheck all of the things                              *
+* Find a solution for overly long descriptions              *
+* Release and promote                                       *
+* More social media tie ins and feedback                    *
+* Rewrite map to enable proper crossfade                    *
+************************************************************/
+
 var vis;
 var layers;
 var oldZoomLevel;
