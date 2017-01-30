@@ -5,6 +5,22 @@ Driving hyper local civic engagement and allocation of resources through data.
 Leverage publicly available data-sets and mapping technology to allow people to see problems in their communities, and where they can volunteer to help address them.  Additionally, we'd like to provide resources for agencies and non profits to make informed efforts about where to allocate their resources, and where they can get people assist with their efforts.
 
 
+## TODO
+	1. Refactor into Angular 2
+	2. Host on github pages and enable gzip
+	3. Webpack
+	4. Use chronjob to auto publish new opportunities via git
+	5. Turn css into sass and DRY it out
+	6. Work on more opportunties and foodbank links
+	7. Spellcheck all of the things
+	8. Find a solution for overly long descriptions
+	9. Prevent one org from taking over all the listings
+	10. Release and promote
+	11. More social media tie ins and feedback
+	12. Rewrite map to enable proper crossfade (nice to have but not required)
+
+
+
 ## Selected Data-sets
 
 ### Volunteer
@@ -96,11 +112,3 @@ Leverage publicly available data-sets and mapping technology to allow people to 
 ## Technical resources
 	https://carto.com/
 	https://www.mapbox.com/
-
-## Roadmap
-	1. Identify what datasets we wish to target
-	1. Identify sources of that data
-	1. Pick first source
-	1. Tech choice
-	1. Plot on map
-	1. Integrate volunteer
