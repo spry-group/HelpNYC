@@ -13,12 +13,11 @@ Leverage publicly available data-sets and mapping technology to allow people to 
 	5. Fix broken social media
 	6. Add back in google analytics file
 	7. Refactor into Angular 2
-	8. Host on github pages and enable gzip
-	9. Webpack
 	10. Turn css into sass and DRY it out
 	11. Prevent one org from taking over all the listings
 	12. Release and promote
 	13. More social media tie ins and feedback
+	9. Webpack (nice to have but not required)
 	14. Rewrite map to enable proper crossfade (nice to have but not required)
 
 
