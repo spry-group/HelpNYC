@@ -6,19 +6,19 @@ Leverage publicly available data-sets and mapping technology to allow people to 
 
 
 ## TODO
-	1. Use chronjob to auto publish new opportunities via git
-	2. Fix "more opportunties" and foodbank links
-	3. Spellcheck all of the things
-	4. Find a solution for overly long descriptions
-	5. Fix broken social media
-	6. Add back in google analytics file
-	7. Refactor into Angular 2
-	10. Turn css into sass and DRY it out
-	11. Prevent one org from taking over all the listings
-	12. Release and promote
-	13. More social media tie ins and feedback
-	9. Webpack (nice to have but not required)
-	14. Rewrite map to enable proper crossfade (nice to have but not required)
+1. Use chronjob to auto publish new opportunities via git
+1. Fix "more opportunties" and foodbank links
+1. Spellcheck all of the things
+1. Find a solution for overly long descriptions
+1. Fix broken social media
+1. Add back in google analytics file
+1. Refactor into Angular 2
+1. Turn css into sass and DRY it out
+1. Prevent one org from taking over all the listings
+1. Release and promote
+1. More social media tie ins and feedback
+1. Webpack (nice to have but not required)
+1. Rewrite map to enable proper crossfade (nice to have but not required)
 
 
 
