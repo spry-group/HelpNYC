@@ -193,6 +193,17 @@ function hideInfoModal() {
 
 function _getOpportunities(data) {
     let zips = data.zipcodes.split(', ');
+    // Update foodbank and get more opportunities link
+    $('.organization-foodbank h3 a, .organization-foodbank .more a').attr('href',
+        'http://volunteer.foodbanknyc.org/HOC__Volunteer_Opportunity_Search_Page?dstnc=10&k=&p=Se&z=' + zips[0]
+    );
+    $('.more-opportunities a').attr('href',
+        'https://www.volunteermatch.org/search#k=&v=false&s=1&o=recency&l=' + zips[0] + '&r=20&sk=&na=' +
+        '&categories=7&categories=11&categories=12&categories=14&categories=15&categories=17' +
+        '&categories=22&categories=23&categories=39&categories=41&categories=42'
+    );
+
+    // List opportunities
     let opportunities = [];
     $('.volunteer-matches').html('<h3>Loading...</h3>');
 
