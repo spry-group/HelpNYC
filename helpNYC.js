@@ -32,7 +32,7 @@ var layerList = [
     },
     {
         pos: 2,
-        label: 'increase fluency.'
+        label: 'learn English.'
     }
 ];
 
@@ -77,7 +77,7 @@ window.onload = function() {
             headerText.text(layerList[0].label);
 
             // Use page visibility api to prevent ugly choropleth flickering when tabbing out and back
-            if (typeof document.addEventListener !== "undefined" || typeof document[hidden] !== "undefined") {
+            if (typeof document.addEventListener !== 'undefined' || typeof document[hidden] !== 'undefined') {
                 document.addEventListener(visibilityChange, toggleChoroplethTransitions, false);
             }
 
@@ -178,7 +178,7 @@ window.onload = function() {
     $('.call-to-action-text .intro-3').delay(4000).fadeTo(2000, 1);
     $('.call-to-action-text .intro-4').delay(6500).fadeTo(2000, 1);
     $('.call-to-action-text .intro-5').delay(8750).fadeTo(2250, 1);
-    $('.modal-call-to-action').on('click', function(e) {
+    $('.modal-call-to-action').on('click', function() {
         $('#map, .header .prompt, .footer').stop().fadeTo(1250, 1);
         $('.modal-call-to-action').stop().fadeOut(1);
     });

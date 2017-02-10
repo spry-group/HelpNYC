@@ -43,7 +43,10 @@ a, a:link, a:visited  {
 }
 .header .header-text {
     position: relative;
-    top: -0.36em;
+    text-align: left;
+    display: inline-block;
+    min-width: 11em;
+    top: -0.39em;
     font-size: 1.5em;
 }
 .header .logo {
@@ -234,6 +237,11 @@ a, a:link, a:visited  {
     background-repeat: no-repeat;
 }
 
+
+.twitter-share-button {
+    vertical-align: bottom;
+}
+
 /* Mobile view */
 @media (max-width: 750px) {
     body {
@@ -252,10 +260,10 @@ a, a:link, a:visited  {
         height: 5em;
     }
     .header .logo {
-        height: 3.75em;
+        height: 4.25em;
     }
     .header .header-text {
-        top: -0.4em;
+        top: -0.38em;
         font-size: 3.75em;
     }
     .footer img {
@@ -476,8 +484,4 @@ a, a:link, a:visited  {
 }
 #map .cartodb-legend .legend-title {
     text-align: center;
-}
-
-.twitter-share-button {
-    vertical-align: bottom;
 }
