@@ -223,6 +223,10 @@ function _appendOpportunities(opportunities) {
     let matchesContainer = $('.volunteer-matches');
     matchesContainer.empty();
     opportunities.slice(0, 7).forEach(opportunity => {
+        // Truncate after approximately 5 lines
+        if (opportunity.description.length > 590) {
+            opportunity.description = opportunity.description.slice(0, 590) + '...';
+        }
         matchesContainer.append(
             '<div class="volunteer-match">' +
                 '<h3 class="margin-none">' +
