@@ -183,14 +183,22 @@ a, a:link, a:visited  {
 .modal-info-content .opportunities .opportunities-text h4 {
     color: #444;
 }
-.modal-info-content .opportunities .opportunities-text .volunteer-match {
-    margin-top: 1.5em;
+.modal-info-content .opportunities-text .volunteer-match h3,
+.modal-info-content .opportunities-text .organization-foodbank h3 {
+    margin-bottom: 0.2em;
 }
+.modal-info-content .opportunities-text .volunteer-match h4,
+.modal-info-content .opportunities-text .organization-foodbank h4 {
+    margin-bottom: 0.25em;
+}
+
 .opportunities .opportunities-text p {
-    margin: 0.5em 0;
+    margin-bottom: 0.5em;
+    line-height: 1.4;
 }
 .opportunities .opportunities-text .more {
     text-align: right;
+    margin-bottom: 1.5em;
 }
 .opportunities .opportunities-text .more.more-opportunities {
     margin: 1em 0 1.5em 0em;
