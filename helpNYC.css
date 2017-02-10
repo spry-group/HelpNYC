@@ -184,16 +184,21 @@ a, a:link, a:visited  {
     margin-top: 1.5em;
 }
 .opportunities .opportunities-text p {
-    margin: 0.5em 0 1.75em 0;
+    margin: 0.5em 0;
 }
 .opportunities .opportunities-text .more {
     text-align: right;
-    padding: 2em 0 3em 0em;
+}
+.opportunities .opportunities-text .more.more-opportunities {
+    margin: 1em 0 1.5em 0em;
+    font-size: 2em;
+    text-align: center;
 }
 .opportunities .opportunities-text .more a {
     font-weight: 700;
     color: #0000b3;
-    font-size: 1.5em;
+    margin-bottom: 1.25em;
+    font-size: 1.1em;
 }
 .opportunities .opportunity-description {
     max-height: 5.75em;

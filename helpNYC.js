@@ -236,6 +236,9 @@ function _appendOpportunities(opportunities) {
                 '</h3>' +
                 '<h4 class="margin-none">' + opportunity.org + '</h4>' +
                 '<p class="margin-none opportunity-description">' + opportunity.description + '</p>' +
+                '<div class="more"><a href="' + decodeURIComponent(opportunity.link) + '" target="_blank">' +
+                    'More' +
+                '</a></div>' +
             '</div>'
         )
     });
