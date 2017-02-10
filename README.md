@@ -6,12 +6,6 @@ Leverage publicly available data-sets and mapping technology to allow people to 
 
 
 ## TODO
-1. Use chronjob to auto publish new opportunities via git
-1. Fix "more opportunties" and foodbank links
-1. Spellcheck all of the things
-1. Find a solution for overly long descriptions
-1. Fix broken social media
-1. Add back in google analytics file
 1. Refactor into Angular 2
 1. Turn css into sass and DRY it out
 1. Prevent one org from taking over all the listings
