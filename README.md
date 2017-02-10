@@ -113,3 +113,14 @@ Leverage publicly available data-sets and mapping technology to allow people to 
 ## Technical resources
 	https://carto.com/
 	https://www.mapbox.com/
+
+## Updates Deployment
+
+1. ```git clone git@github-helpnyc:spry-group/HelpNYC.git``` 
+1. ```cp HelpNYC/config .ssh/config```
+1. ```ssh-keygen -t rsa``` 
+1. rename keys to id_{fingerprint}.* ```mv ~/.ssh/id_rsa ~/.ssh/id_{fingerprint}; mv ~/.ssh/id_rsa.pub ~/.ssh/id_{fingerprint}.pub
+1. update ~/.ssh/config with path to key.
+1. cd HelpNYC
+1. git remote set-url origin git@github-helpnyc:spry-group/HelpNYC.git
+1. setup cron job to call HelpNYC/update.sh 
