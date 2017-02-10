@@ -94,7 +94,7 @@ window.onload = function() {
             function startChoroplethTransitions() {
                 return setInterval(function() {
                     crossFadeLayers(headerText);
-                }, 13500);
+                }, 15000);
             }
         }
     );
