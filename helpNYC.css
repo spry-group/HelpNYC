@@ -477,3 +477,7 @@ a, a:link, a:visited  {
 #map .cartodb-legend .legend-title {
     text-align: center;
 }
+
+.twitter-share-button {
+    vertical-align: bottom;
+}

@@ -50,7 +50,7 @@ if (typeof document.hidden !== 'undefined') { // Opera 12.10 and Firefox 18 and 
 }
 
 window.onload = function() {
-    cartodb.createVis('map',
+    window.cartodb.createVis('map',
         'https://paoloud.carto.com/api/v2/viz/0d4a4238-8741-11e6-bad8-0e8c56e2ffdb/viz.json',
         mapStartingParams()
         ).done(function(visualization, maplayers) {
@@ -157,6 +157,7 @@ window.onload = function() {
         container.find('.stat-fluency').text(data.non_fluent_in_english.toLocaleString());
         container.fadeIn(1000);
         _getOpportunities(data);
+        _loadTwitterButton();
     }
 
     function mapStartingParams() {
@@ -256,4 +257,18 @@ function _appendOpportunities(opportunities) {
 
     // Scroll back to the top of the modal
     $('.modal-info-content').scrollTop(0)
+}
+
+function _loadTwitterButton() {
+    // The twitter button is obnoxiously fragile.
+    // It never appears on FF or edge if it's inside a hidden div the first time it loads.
+    // So to get around this stupidity we just dynamically insert the first time we load a modal.
+    if ($('div.social-media .twitter-share-button').length === 0) {
+        $('.social-media').append(
+            '<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" ' +
+            'data-text="I&#39;m helping to end poverty in my neighborhood. You can too!" ' +
+            'data-url="http://helpnyc.org" data-hashtags="HelpNYC" data-dnt="true" data-show-count="false">Tweet</a>'
+        );
+        window.twttr.widgets.load();
+    }
 }
