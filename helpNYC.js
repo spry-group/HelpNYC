@@ -193,7 +193,7 @@ function hideInfoModal() {
 }
 
 function _getOpportunities(data) {
-    let zips = data.zipcodes.split(', ');
+    var zips = data.zipcodes.split(', ');
     // Update foodbank and get more opportunities link
     $('.organization-foodbank h3 a, .organization-foodbank .more a').attr('href',
         'http://volunteer.foodbanknyc.org/HOC__Volunteer_Opportunity_Search_Page?dstnc=10&k=&p=Se&z=' + zips[0]
@@ -205,19 +205,19 @@ function _getOpportunities(data) {
     );
 
     // List opportunities
-    let opportunities = [];
+    var opportunities = [];
     $('.volunteer-matches').html('<h3>Loading...</h3>');
 
     // TODO make this dry and have the appending happen in a called function
-    opportunitiesDatedPromise.then(opportunitiesDated => {
-        zips.forEach(zip => {
+    opportunitiesDatedPromise.then(function(opportunitiesDated) {
+        zips.forEach(function(zip) {
             if (zip in opportunitiesDated) {
                 opportunities.push(...opportunitiesDated[zip] || []);
             }
         });
         if (opportunities.length < 7) {
-            opportunitiesOngoingPromise.then(opportunitiesOngoing => {
-                zips.forEach(zip => {
+            opportunitiesOngoingPromise.then(function(opportunitiesOngoing) {
+                zips.forEach(function(zip) {
                     if (zip in opportunitiesOngoing) {
                         opportunities.push(...opportunitiesOngoing[zip]);
                     }
@@ -232,9 +232,9 @@ function _getOpportunities(data) {
 
 function _appendOpportunities(opportunities) {
     // TODO: after switching to angular 2 just use an *ngFor instead of this crap
-    let matchesContainer = $('.volunteer-matches');
+    var matchesContainer = $('.volunteer-matches');
     matchesContainer.empty();
-    opportunities.slice(0, 7).forEach(opportunity => {
+    opportunities.slice(0, 7).forEach(function(opportunity) {
         // Truncate after approximately 5 lines
         if (opportunity.description.length > 590) {
             opportunity.description = opportunity.description.slice(0, 590) + '...';
