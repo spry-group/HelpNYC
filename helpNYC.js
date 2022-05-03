@@ -267,7 +267,7 @@ function _loadTwitterButton() {
         $('.social-media').append(
             '<a href="https://twitter.com/share" class="twitter-share-button" data-size="large" ' +
             'data-text="I&#39;m helping to end poverty in my neighborhood. You can too!" ' +
-            'data-url="http://helpnyc.org" data-hashtags="HelpNYC" data-dnt="true" data-show-count="false">Tweet</a>'
+            'data-url="http://helpnyc.spry-group.com" data-hashtags="HelpNYC" data-dnt="true" data-show-count="false">Tweet</a>'
         );
         window.twttr.widgets.load();
     }
